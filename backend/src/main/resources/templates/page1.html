@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div class="container">
+        <table>
+            <thead>
+                <th>
+                    id
+                </th>
+                <th>tên</th>
+                <th>khoa</th>
+            </thead>
+            <tbody>
+                <tr th:each="item:${list}">
+                    <td th:text="${item.id}"></td>
+                    <td th:text="${item.name}"></td>
+                    <td th:text="${item.department}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
