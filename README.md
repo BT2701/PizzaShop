@@ -149,4 +149,4 @@ Contributions are welcome! Please fork the repository and submit a pull request 
 
 ## License
 
-Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
+Distributed under the Apache License 2.0. See [LICENSE](LICENSE) for more information.
