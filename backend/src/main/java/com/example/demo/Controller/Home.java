@@ -2,12 +2,13 @@ package com.example.demo.Controller;
 
 import com.example.demo.Repository.StudentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@Controller
 @RequestMapping("/home")
 public class Home {
     @Autowired
@@ -22,4 +23,5 @@ public class Home {
         model.addAttribute("list", repo.findStudentKhoa2());
         return "page1";
     }
+
 }

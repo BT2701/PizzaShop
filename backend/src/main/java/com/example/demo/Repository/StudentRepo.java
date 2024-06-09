@@ -9,9 +9,9 @@ import java.util.List;
 
 @Repository
 public interface StudentRepo extends JpaRepository<Student, Integer> {
-    @Query("SELECT id, name, department from student group by department")
-    List<Student> findStudentKhoa2();
+    @Query("SELECT count(s.id) as total from student s group by s.department")
+    List<Integer> findStudentKhoa2();
 
-    @Query("select id, name, department from student where it > 5 group by department")
+    @Query("select s from student s where s.it > 5 group by s.department")
     List<Student> findStudentOver5();
 }
