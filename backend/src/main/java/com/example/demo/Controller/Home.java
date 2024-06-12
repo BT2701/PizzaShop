@@ -1,18 +1,17 @@
 package com.example.demo.Controller;
 
-import com.example.demo.Repository.StudentRepo;
+import com.example.demo.Repository.SanPhamRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 @Controller
 @RequestMapping("/home")
 public class Home {
     @Autowired
-    private StudentRepo repo;
+    private SanPhamRepo repo;
 
     @GetMapping
     public String home() {
@@ -20,7 +19,7 @@ public class Home {
     }
     @GetMapping("/page1")
     public String page1(Model  model) {
-        model.addAttribute("list", repo.findStudentKhoa2());
+        model.addAttribute("list", repo.findAll());
         return "page1";
     }
 

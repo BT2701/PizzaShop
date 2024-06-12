@@ -1,7 +1,7 @@
 package com.example.demo.Controller;
 
-import com.example.demo.Model.Student;
-import com.example.demo.Repository.StudentRepo;
+import com.example.demo.Model.SanPham;
+import com.example.demo.Repository.SanPhamRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,12 +12,13 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
-public class StudentCTL {
+public class SanPhamCTL {
     @Autowired
-    private StudentRepo repo;
+    private SanPhamRepo sanPhamRepo;
 
-    @GetMapping("/api/students")
-    public List<Student> getAll() {
-        return repo.findAll();
+    @GetMapping("/api/productList")
+    public List<SanPham> getAllProducts() {
+        return sanPhamRepo.findAll();
     }
+
 }
