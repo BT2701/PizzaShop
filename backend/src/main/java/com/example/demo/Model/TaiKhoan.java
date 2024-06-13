@@ -9,12 +9,14 @@ public class TaiKhoan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "MaNV")
-    private Integer maNV;
-    @Column(name = "MatKhau")
-    private String matKhau;
-    @Column(name = "Quyen")
-    private String quyen;
-    @Column(name = "TrangThai")
-    private Integer trangThai;
+    @Column
+    private Integer manv;
+    @Column
+    private Integer makh;
+    @Column
+    private String matkhau;
+    @Column
+    private Integer quyen;
+    @Column
+    private Integer trangthai;
 }

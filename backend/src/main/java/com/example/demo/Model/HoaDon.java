@@ -10,17 +10,17 @@ import java.sql.Timestamp;
 public class HoaDon {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="MaHD")
-    private Integer maHD;
-    @Column(name="MaKH")
-    private Integer maKH;
-    @Column(name="MaNV")
-    private Integer maNV;
-    @Column(name = "NgayLap")
-    private Timestamp ngayLap;
-    @Column(name = "TongTien")
-    private Long tongTien;
-    @Column(name = "GhiChu")
-    private String ghiChu;
+    private Integer mahd;
+    @Column
+    private Integer makh;
+    @Column
+    private Integer manv;
+    @Column
+    @Temporal(TemporalType.TIMESTAMP)
+    private Timestamp ngaylap;
+    @Column
+    private Long tongtien;
+    @Column
+    private String ghichu;
 
 }

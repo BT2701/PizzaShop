@@ -8,17 +8,18 @@ import lombok.Data;
 public class PhanQuyen {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Quyen")
-    private String quyen;
-    @Column(name = "NhapHang")
-    private Integer nhapHang;
-    @Column(name = "SanPham")
-    private Integer sanPham;
-    @Column(name = "NhanVien")
-    private Integer nhanVien;
-    @Column(name = "KhachHang")
-    private Integer khachHang;
-    @Column(name = "ThongKe")
-    private Integer thongKe;
+    private Integer quyen;
+    @Column
+    private String tenquyen;
+    @Column
+    private Integer nhaphang;
+    @Column
+    private Integer sanpham;
+    @Column
+    private Integer nhanvien;
+    @Column
+    private Integer khachhang;
+    @Column
+    private Integer thongke;
 
 }

@@ -8,14 +8,13 @@ import lombok.Data;
 public class NhanVien {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="MaNV")
-    private Integer maNV;
-    @Column(name = "Ho")
+    private Integer manv;
+    @Column
     private String ho;
-    @Column(name = "Ten")
+    @Column
     private String ten;
-    @Column(name = "GioiTinh")
-    private String gioiTinh;
-    @Column(name = "ChucVu")
-    private String chucVu;
+    @Column
+    private String gioitinh;
+    @Column
+    private String chucvu;
 }

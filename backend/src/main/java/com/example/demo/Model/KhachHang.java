@@ -8,16 +8,15 @@ import lombok.Data;
 public class KhachHang {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="MaKH")
-    private Integer maKH;
-    @Column(name="Ho")
+    private Integer makh;
+    @Column
     private String ho;
-    @Column(name = "Ten")
+    @Column
     private String ten;
-    @Column(name = "GioiTinh")
-    private String gioiTinh;
-    @Column(name = "TongChiTieu")
-    private Long tongChiTieu;
-    @Column(name = "TinhTrang")
-    private Integer tinhTrang;
+    @Column
+    private String gioitinh;
+    @Column
+    private Long tongchitieu;
+    @Column
+    private Integer tinhtrang;
 }

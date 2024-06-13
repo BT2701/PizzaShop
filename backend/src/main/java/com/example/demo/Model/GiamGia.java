@@ -17,8 +17,10 @@ public class GiamGia {
     private Integer phantramgiam;
     @Column
     private Integer dieukien;
+    @Temporal(TemporalType.TIMESTAMP)
     @Column
     private Timestamp ngaybd;
+    @Temporal(TemporalType.TIMESTAMP)
     @Column
     private Timestamp ngaykt;
 }

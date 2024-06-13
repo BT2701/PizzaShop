@@ -8,7 +8,6 @@ import lombok.Data;
 public class SanPham {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "MaSP", insertable = false, updatable = false)
     private Integer masp;
     @Column
     private String tensp;

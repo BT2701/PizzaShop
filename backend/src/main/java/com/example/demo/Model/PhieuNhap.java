@@ -10,14 +10,14 @@ import java.sql.Timestamp;
 public class PhieuNhap {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "MaPN")
-    private Integer maPN;
-    @Column(name = "MaNCC")
-    private Integer maNCC;
-    @Column(name = "MaNV")
-    private Integer maNV;
-    @Column(name = "NgayLap")
-    private Timestamp ngayLap;
-    @Column(name = "TongTien")
-    private Long tongTien;
+    private Integer mapn;
+    @Column
+    private Integer mancc;
+    @Column
+    private Integer manv;
+    @Column
+    @Temporal(TemporalType.TIMESTAMP)
+    private Timestamp ngaylap;
+    @Column
+    private Long tongtien;
 }
