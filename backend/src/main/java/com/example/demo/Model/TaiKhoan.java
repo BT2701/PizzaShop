@@ -9,14 +9,17 @@ public class TaiKhoan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column
-    private Integer manv;
-    @Column
-    private Integer makh;
+    @OneToOne
+    @JoinColumn(name = "manv")
+    private NhanVien nhanvien;
+    @OneToOne
+    @JoinColumn(name = "makh")
+    private KhachHang khachhang;
     @Column
     private String matkhau;
-    @Column
-    private Integer quyen;
+    @ManyToOne
+    @JoinColumn(name = "quyen")
+    private PhanQuyen phanquyen;
     @Column
     private Integer trangthai;
 }

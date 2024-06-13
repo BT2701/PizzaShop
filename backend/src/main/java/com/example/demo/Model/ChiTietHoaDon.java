@@ -9,10 +9,12 @@ public class ChiTietHoaDon {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column
-    private Integer mahd;
-    @Column
-    private Integer masp;
+    @ManyToOne
+    @JoinColumn(name = "mahd")
+    private HoaDon hoadon;
+    @ManyToOne
+    @JoinColumn(name = "masp")
+    private SanPham sanpham;
     @Column
     private Integer soluong;
     @Column

@@ -1,7 +1,10 @@
 package com.example.demo.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.List;
 
 @Entity(name="sanpham")
 @Data
@@ -11,8 +14,9 @@ public class SanPham {
     private Integer masp;
     @Column
     private String tensp;
-    @Column
-    private Integer maloai;
+    @ManyToOne
+    @JoinColumn(name = "maloai")
+    private Loai loai;
     @Column
     private Integer soluong;
     @Column
@@ -21,5 +25,11 @@ public class SanPham {
     private String hinhanh;
     @Column
     private Integer dongia;
+    @JsonIgnore // để tránh vòng lặp vô hạn khi lấy dữ liệu
+    @OneToMany(mappedBy = "sanpham")
+    private List<ChiTietHoaDon> chiTietHoaDonList;
+    @JsonIgnore // để tránh vòng lặp vô hạn khi lấy dữ liệu
+    @OneToMany(mappedBy = "sanpham")
+    private List<ChiTietPhieuNhap> chiTietPhieuNhapList;
 
 }

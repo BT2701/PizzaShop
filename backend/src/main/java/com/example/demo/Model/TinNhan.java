@@ -22,4 +22,6 @@ public class TinNhan {
     @Column
     @Temporal(TemporalType.TIMESTAMP)
     private Timestamp thoigian;
+    @Column
+    private Integer loainguoigui;
 }

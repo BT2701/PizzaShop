@@ -1,5 +1,6 @@
 package com.example.demo.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -9,10 +10,12 @@ public class ChiTietPhieuNhap {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column
-    private Integer mapn;
-    @Column
-    private Integer masp;
+    @ManyToOne
+    @JoinColumn(name = "mapn")
+    private PhieuNhap phieunhap;
+    @ManyToOne
+    @JoinColumn(name = "masp")
+    private SanPham sanpham;
     @Column
     private Integer soluong;
     @Column
