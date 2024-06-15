@@ -98,7 +98,7 @@ const Login = () => {
                 <button type="submit" className="btn btn-primary btn-login">Đăng nhập</button>
               </div>
               <div className="text-center mb-3">
-                <a href="./sign-up" className="btn btn-primary btn-register">Đăng ký</a>
+                <Link to="/register" className="btn btn-primary btn-register">Đăng ký</Link>
               </div>
             </div>
             <div className="alert alert-danger" role="alert">
