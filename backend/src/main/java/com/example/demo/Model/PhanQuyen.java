@@ -14,16 +14,6 @@ public class PhanQuyen {
     private Integer quyen;
     @Column
     private String tenquyen;
-    @Column
-    private Integer nhaphang;
-    @Column
-    private Integer sanpham;
-    @Column
-    private Integer nhanvien;
-    @Column
-    private Integer khachhang;
-    @Column
-    private Integer thongke;
     @JsonIgnore
     @OneToMany(mappedBy = "phanquyen")
     private List<TaiKhoan> taiKhoanList;
