@@ -4,23 +4,23 @@ import Header from './components/header-footer/header';
 import Footer from './components/header-footer/footer';
 import Login from './components/login-resigter/login';
 import Register from './components/login-resigter/Register';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 const App = () => {
     return (
-        <div className="flex flex-col min-h-screen">
-            <Header />
-            <div className="flex flex-grow">
-            <Login />
-                <Router>
+        <Router>
+            <div className="flex flex-col min-h-screen">
+                <Header />
+                <div className="flex flex-grow">
                     <Routes>
+                        <Route path="/" element={<Navigate to="/login" />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
                     </Routes>
-                </Router>
+                </div>
+                <Footer />
             </div>
-            <Footer />
-        </div>
+        </Router>
     );
 };
 
