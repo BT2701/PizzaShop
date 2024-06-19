@@ -97,7 +97,7 @@ const Login = () => {
             </div>
             <div className="form-operation">
               <div className="text-center mb-3">
-                <button type="submit" className="btn btn-primary btn-login">Đăng nhập</button>
+                <Link to ="/homepage" className="btn btn-primary btn-login">Đăng nhập</Link>
               </div>
               <div className="text-center mb-3">
                 <Link to="/register" className="btn btn-primary btn-register">Đăng ký</Link>
