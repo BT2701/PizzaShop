@@ -2,32 +2,27 @@ import React, { useState, useEffect, useRef } from 'react';
 import '../../Static/CSS/index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import 'bootstrap/dist/css/bootstrap-utilities.min.css';
 import 'normalize.css';
+import axios from 'axios';
 
 function ClientHome() {
-  const [sanphamList, setSanphamList] = useState([]);
   const [sanphamListnoibac, setSanphamListnoibac] = useState([]);
-  const [sanphamListkhuyenmai, setSanphamListkhuyenmai] = useState([]);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [sliderIndex, setSliderIndex] = useState(0);
 
-  const rightBtnRef = useRef(null);
-  const leftBtnRef = useRef(null);
   const sliderProductParentRef = useRef(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      const sanphamResponse = await fetch('/api/sanpham'); // Adjust the URL to your API endpoint
-      const sanphamData = await sanphamResponse.json();
-      setSanphamList(sanphamData);
+      try {
 
-      const sanphamNoiBacResponse = await fetch('/api/sanphamnoibac');
-      const sanphamNoiBacData = await sanphamNoiBacResponse.json();
-      setSanphamListnoibac(sanphamNoiBacData);
+        const sanphamNoiBacResponse = await axios.get('http://localhost:8081/api/sanphamnoibac');
+        setSanphamListnoibac(sanphamNoiBacResponse.data);
 
-      const sanphamKhuyenMaiResponse = await fetch('/api/sanphamkhuyenmai');
-      const sanphamKhuyenMaiData = await sanphamKhuyenMaiResponse.json();
-      setSanphamListkhuyenmai(sanphamKhuyenMaiData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
     };
 
     fetchData();
@@ -43,20 +38,6 @@ function ClientHome() {
 
   const handleDotClick = (index) => {
     setCurrentSlide(index);
-  };
-
-  const handleRightClick = () => {
-    setSliderIndex((prevIndex) => {
-      const newIndex = prevIndex + 1;
-      return newIndex > sanphamListkhuyenmai.length - 1 ? 0 : newIndex;
-    });
-  };
-
-  const handleLeftClick = () => {
-    setSliderIndex((prevIndex) => {
-      const newIndex = prevIndex - 1;
-      return newIndex < 0 ? sanphamListkhuyenmai.length - 1 : newIndex;
-    });
   };
 
   useEffect(() => {
@@ -85,68 +66,12 @@ function ClientHome() {
         </div>
       </section>
 
-      <section className="first-slider-product" style={{ display: sanphamListkhuyenmai.length > 0 ? 'block' : 'none' }}>
-        <div className="product-container">
-          <div className="content">
-            <div className="title">
-              <h2 id="title-slider-product">Săn sale online mỗi ngày</h2>
-            </div>
-            <div className="slider-product-container">
-              <div className="slider-product-items-parent" ref={sliderProductParentRef}>
-                {sanphamListkhuyenmai.length === 0 ? (
-                  <p>Không có sản phẩm nào</p>
-                ) : (
-                  sanphamListkhuyenmai.map((sanpham, index) => (
-                    <div key={index} className="slider-product-item">
-                      <img src={sanpham.src} alt={sanpham.tenSanPham} />
-                      <div className="slider-product-text">
-                        {sanpham.tenKhuyenMai ? (
-                          <li style={{ backgroundColor: sanpham.background ?? '#fcfcfc' }}>
-                            <img src={require('../../Static/IMG/icon-percent.webp')} alt="" />
-                            <p>{sanpham.tenKhuyenMai}</p>
-                          </li>
-                        ) : (
-                          <li style={{ backgroundColor: '#fcfcfc' }}></li>
-                        )}
-                        <li>{sanpham.tenSanPham}</li>
-                        <li>Online giá rẻ</li>
-                        <li>
-                          <a href="">{sanpham.giaBan}<sup>đ</sup></a>
-                          <span>-{sanpham.giaTri ?? 0}%</span>
-                        </li>
-                        <li>
-                          {(sanpham.giaTri != null
-                            ? sanpham.giaBan - sanpham.giaBan * sanpham.giaTri / 100
-                            : sanpham.giaBan).toFixed(2)}<sup>đ</sup>
-                        </li>
-                        <li>
-                          {sanpham.TrungBinhStar != null && [...Array(sanpham.TrungBinhStar)].map((_, starIndex) => (
-                            <i key={starIndex} className="fa-solid fa-star" style={{ color: '#FB6E2E' }}></i>
-                          ))}
-                        </li>
-                        <li>
-                          <p style={{ color: 'gray' }}>Đã bán {sanpham.TongSoLuongBanDuoc ?? 0}</p>
-                        </li>
-                      </div>
-                    </div>
-                  ))
-                )}
-              </div>
-              <div className="slider-product-btn">
-                <i className="fas fa-chevron-left" onClick={handleLeftClick} ref={leftBtnRef}></i>
-                <i className="fas fa-chevron-right" onClick={handleRightClick} ref={rightBtnRef}></i>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <section className="product-gallery-one">
         <div className="container">
           <div className="product-gallery-content">
             <div className="product-gallery-title">
               <h2>SẢN PHẨM NỔI BẬT NHẤT</h2>
-              <ul style={{ display: 'none' }}>
+              <ul style={{ display: 'flex' }}>
                 <li><a href="">Catgories</a></li>
                 <li><a href="">Catgories</a></li>
                 <li><a href="">Tất cả</a></li>
@@ -160,7 +85,6 @@ function ClientHome() {
                   <div
                     key={sanpham.id}
                     className="product-gallery-content-product-item"
-                    // onClick={() => detailProduct(sanpham.id)}
                   >
                     <div className="split-img">
                       <img src={sanpham.src} alt={sanpham.tenSanPham} className="image-product-vip" />
@@ -204,9 +128,5 @@ function ClientHome() {
     </div>
   );
 }
-
-// function detailProduct(id) {
-//   window.location.replace(`http://localhost/SaleSphere/index.php?page=productdetail&id=${id}`);
-// }
 
 export default ClientHome;
