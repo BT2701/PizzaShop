@@ -21,7 +21,7 @@ public class SanPhamCTL {
         return service.getALL();
     }
     @GetMapping("/api/sanphamnoibac")
-    @CrossOrigin(origins = "http://localhost:3000/homepage")
+    @CrossOrigin(origins = "http://localhost:3000")
     public List<SanPham> danhSachSpNoiBac() {
         return service.danhSachSpNoiBac();
     }
