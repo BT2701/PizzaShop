@@ -5,7 +5,7 @@ const StudentTable = () => {
     const [students, setStudents] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:8081/api/students')
+        axios.get('http://localhost:8081/api/sanphamnoibac')
             .then(response => {
                 console.log(response.data); // Log dữ liệu phản hồi
                 setStudents(response.data);
@@ -34,13 +34,13 @@ const StudentTable = () => {
                     <tbody>
                         {students.map(student => (
                             <tr key={student.id} className="hover:bg-blue-100 hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-55">
-                                <td className="px-6 py-4 border-b border-gray-200">{student.id}</td>
-                                <td className="px-6 py-4 border-b border-gray-200">{student.name}</td>
-                                <td className="px-6 py-4 border-b border-gray-200">{student.age}</td>
-                                <td className="px-6 py-4 border-b border-gray-200">{student.department}</td>
-                                <td className="px-6 py-4 border-b border-gray-200">{student.math}</td>
-                                <td className="px-6 py-4 border-b border-gray-200">{student.english}</td>
-                                <td className="px-6 py-4 border-b border-gray-200">{student.it}</td>
+                                <td className="px-6 py-4 border-b border-gray-200">{student.masp}</td>
+                                <td className="px-6 py-4 border-b border-gray-200">{student.tensp}</td>
+                                <td className="px-6 py-4 border-b border-gray-200">{student.loai.tenloai}</td>
+                                <td className="px-6 py-4 border-b border-gray-200">{student.soluong}</td>
+                                <td className="px-6 py-4 border-b border-gray-200">{student.donvitinh}</td>
+                                <td className="px-6 py-4 border-b border-gray-200">{student.hinhanh}</td>
+                                <td className="px-6 py-4 border-b border-gray-200">{student.dongia}</td>
                             </tr>
                         ))}
                     </tbody>

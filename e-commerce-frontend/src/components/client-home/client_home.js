@@ -3,6 +3,7 @@ import '../../Static/CSS/index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap/dist/css/bootstrap-utilities.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import 'normalize.css';
 import axios from 'axios';
 
@@ -83,39 +84,39 @@ function ClientHome() {
               ) : (
                 sanphamListnoibac.map((sanpham) => (
                   <div
-                    key={sanpham.id}
+                    key={sanpham.masp}
                     className="product-gallery-content-product-item"
                   >
                     <div className="split-img">
-                      <img src={sanpham.src} alt={sanpham.tenSanPham} className="image-product-vip" />
+                      <img src={sanpham.hinhanh} alt={sanpham.tensp} className="image-product-vip" />
                     </div>
                     <div className="product-gallery-content-product-text">
-                      {sanpham.tenKhuyenMai && (new Date(sanpham.hansudung) > new Date() || !sanpham.hansudung) ? (
-                        <li style={{ backgroundColor: sanpham.background ?? '#fcfcfc' }}>
+                      {sanpham.loai.tenloai && (new Date(sanpham.soluong) > new Date() || !sanpham.soluong) ? (
+                        <li style={{ backgroundColor: sanpham.donvitinh ?? '#fcfcfc' }}>
                           <img src={require('../../Static/IMG/icon-percent.webp')} alt="" />
-                          <p>{sanpham.tenKhuyenMai}</p>
+                          <p>{sanpham.dongia}</p>
                         </li>
                       ) : (
                         <li style={{ backgroundColor: '#fcfcfc' }}></li>
                       )}
-                      <li>{sanpham.tenSanPham}</li>
+                      <li>{sanpham.tensp}</li>
                       <li>Online giá rẻ</li>
                       <li>
-                        <a href="">{sanpham.giaBan}<sup>đ</sup></a>
-                        <span>-{sanpham.giaTri ?? 0}%</span>
+                        <a href="">{sanpham.dongia}<sup>đ</sup></a>
+                        <span>-{sanpham.dongia ?? 0}%</span>
                       </li>
                       <li>
-                        {(sanpham.giaTri != null
-                          ? sanpham.giaBan - sanpham.giaBan * sanpham.giaTri / 100
-                          : sanpham.giaBan).toFixed(2)}<sup>đ</sup>
+                        {(sanpham.dongia != null
+                          ? sanpham.dongia - sanpham.dongia * sanpham.dongia / 100
+                          : sanpham.dongia).toFixed(2)}<sup>đ</sup>
                       </li>
                       <li>
-                        {sanpham.TrungBinhStar != null && [...Array(sanpham.TrungBinhStar)].map((_, starIndex) => (
+                        {sanpham.donvitinh != null && [...Array(sanpham.donvitinh)].map((_, starIndex) => (
                           <i key={starIndex} className="fa-solid fa-star" style={{ color: '#FB6E2E' }}></i>
                         ))}
                       </li>
                       <li>
-                        <p style={{ color: 'gray' }}>Đã bán {sanpham.TongSoLuongBanDuoc ?? 0}</p>
+                        <p style={{ color: 'gray' }}>Đã bán {sanpham.soluong ?? 0}</p>
                       </li>
                     </div>
                   </div>
