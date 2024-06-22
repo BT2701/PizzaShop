@@ -89,9 +89,9 @@ const Navbar = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav">
-            <li className="nav-item">
-              <a className="nav-link" href="#">
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0 navbar-list">
+            <li className="nav-item dropdown navbar-item">
+              <a className="nav-link" href="#" >
                 Home
               </a>
             </li>

@@ -17,6 +17,10 @@ function ClientHome() {
     const value=parseInt(event.target.value);
     setLimit(value);
   }
+  function formatCurrency(amount) {
+    return amount.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+  }
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -76,39 +80,22 @@ function ClientHome() {
               ) : (
                 sanphamListnoibac.map((sanpham) => (
                   <div
-                    key={sanpham.masp}
+                    key={sanpham[0].masp}
                     className="product-gallery-content-product-item"
                   >
                     <div className="split-img">
-                      <img src={require('../../Static/IMG/SanPham/'+sanpham.hinhanh)} alt={sanpham.tensp} className="image-product-vip" />
+                      <img src={require('../../Static/IMG/SanPham/'+sanpham[0].hinhanh)} alt={sanpham[0].tensp} className="image-product-vip" />
                     </div>
                     <div className="product-gallery-content-product-text">
-                      {sanpham.loai.tenloai && (new Date(sanpham.soluong) > new Date() || !sanpham.soluong) ? (
-                        <li style={{ backgroundColor: sanpham.donvitinh ?? '#fcfcfc' }}>
-                          <img src={require('../../Static/IMG/icon-percent.webp')} alt="" />
-                          <p>{sanpham.dongia}</p>
-                        </li>
-                      ) : (
-                        <li style={{ backgroundColor: '#fcfcfc' }}></li>
-                      )}
-                      <li>{sanpham.tensp}</li>
-                      <li>Online giá rẻ</li>
+                      
+                      <li>{sanpham[0].tensp}</li>
+                      
                       <li>
-                        <a href="">{sanpham.dongia}<sup>đ</sup></a>
-                        <span>-{sanpham.dongia ?? 0}%</span>
+                        {formatCurrency(sanpham[0].dongia)}
                       </li>
+                      
                       <li>
-                        {(sanpham.dongia != null
-                          ? sanpham.dongia - sanpham.dongia * sanpham.dongia / 100
-                          : sanpham.dongia).toFixed(2)}<sup>đ</sup>
-                      </li>
-                      <li>
-                        {sanpham.donvitinh != null && [...Array(sanpham.donvitinh)].map((_, starIndex) => (
-                          <i key={starIndex} className="fa-solid fa-star" style={{ color: '#FB6E2E' }}></i>
-                        ))}
-                      </li>
-                      <li>
-                        <p style={{ color: 'gray' }}>Đã bán {sanpham.soluong ?? 0}</p>
+                        <p style={{ color: 'gray' }}>Đã bán {sanpham[1] ?? 0}</p>
                       </li>
                     </div>
                   </div>
