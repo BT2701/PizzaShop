@@ -19,7 +19,7 @@ public class SanPhamCTL {
     }
     @GetMapping("/api/sanphamnoibac")
     @CrossOrigin(origins = "http://localhost:3000")
-    public List<SanPham> danhSachSpNoiBac(@RequestParam("limit") int limit) {
+    public List<Object[]> danhSachSpNoiBac(@RequestParam("limit") int limit) {
         return service.danhSachSpNoiBac(limit);
     }
 

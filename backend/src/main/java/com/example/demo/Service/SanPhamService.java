@@ -12,10 +12,10 @@ import java.util.List;
 public class SanPhamService {
     @Autowired
     private SanPhamRepo repo;
-    public List<SanPham> danhSachSpNoiBac(int limit) {
-        List<SanPham> list = new ArrayList<>();
+    public List<Object[]> danhSachSpNoiBac(int limit) {
+        List<Object[]> list = new ArrayList<>();
         for (int i = 0; i < limit; i++) {
-            list.add((SanPham) repo.danhSachSpNoiBac().get(i)[0]);
+            list.add(repo.danhSachSpNoiBac().get(i));
         }
         return list;
     }

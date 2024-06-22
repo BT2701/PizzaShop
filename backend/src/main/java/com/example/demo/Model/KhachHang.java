@@ -27,4 +27,6 @@ public class KhachHang {
     private List<HoaDon> hoaDonList;
     @OneToOne(mappedBy = "khachhang")
     private TaiKhoan taikhoan;
+    @OneToOne(mappedBy = "khachhang")
+    private GioHang giohang;
 }

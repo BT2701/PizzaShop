@@ -29,5 +29,6 @@ public class HoaDon {
     @JsonIgnore // để tránh vòng lặp vô hạn khi lấy dữ liệu
     @OneToMany(mappedBy = "hoadon")
     private List<ChiTietHoaDon> chiTietHoaDonList;
-
+    @Column
+    private Integer phantramgiam;
 }

@@ -31,5 +31,8 @@ public class SanPham {
     @JsonIgnore // để tránh vòng lặp vô hạn khi lấy dữ liệu
     @OneToMany(mappedBy = "sanpham")
     private List<ChiTietPhieuNhap> chiTietPhieuNhapList;
+    @JsonIgnore // để tránh vòng lặp vô hạn khi lấy dữ liệu
+    @OneToMany(mappedBy = "sanpham")
+    private List<ChiTietGioHang> chiTietGioHangList;
 
 }
