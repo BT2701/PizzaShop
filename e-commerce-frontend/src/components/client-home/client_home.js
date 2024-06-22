@@ -5,14 +5,12 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap/dist/css/bootstrap-utilities.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import 'normalize.css';
+import { initializeSlider } from '../../Static/js/homepage';
 import axios from 'axios';
 
 function ClientHome() {
   const [sanphamListnoibac, setSanphamListnoibac] = useState([]);
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [sliderIndex, setSliderIndex] = useState(0);
 
-  const sliderProductParentRef = useRef(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,43 +25,23 @@ function ClientHome() {
     };
 
     fetchData();
+    initializeSlider();
   }, []);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prevSlide) => (prevSlide + 1) % 4); // Assuming 4 slides
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  const handleDotClick = (index) => {
-    setCurrentSlide(index);
-  };
-
-  useEffect(() => {
-    if (sliderProductParentRef.current) {
-      sliderProductParentRef.current.style.right = `${sliderIndex * 100}%`;
-    }
-  }, [sliderIndex]);
 
   return (
-    <div>
+    <div className='container'>
       <section id="slider">
-        <div className="aspect-ratio-169" style={{ left: `-${currentSlide * 100}%` }}>
+        <div className="aspect-ratio-169">
           <img src={require('../../Static/IMG/poster.png')} alt="Poster 1" />
           <img src={require('../../Static/IMG/poster2.png')} alt="Poster 2" />
           <img src={require('../../Static/IMG/poster3.png')} alt="Poster 3" />
           <img src={require('../../Static/IMG/poster4.png')} alt="Poster 4" />
         </div>
         <div className="dot-container">
-          {[...Array(4)].map((_, index) => (
-            <div
-              key={index}
-              className={`dot ${index === currentSlide ? 'active' : ''}`}
-              onClick={() => handleDotClick(index)}
-            ></div>
-          ))}
+        <div className="dot active"></div>
+            <div className="dot"></div>
+            <div className="dot"></div>
+            <div className="dot"></div>
         </div>
       </section>
 
@@ -72,10 +50,18 @@ function ClientHome() {
           <div className="product-gallery-content">
             <div className="product-gallery-title">
               <h2>SẢN PHẨM NỔI BẬT NHẤT</h2>
-              <ul style={{ display: 'flex' }}>
-                <li><a href="">Catgories</a></li>
-                <li><a href="">Catgories</a></li>
-                <li><a href="">Tất cả</a></li>
+              <ul style={{ display: 'flex'}}>
+                <li>
+                  <select className='form-select' >
+                    <option disabled selected hidden>Filters</option>
+                    <option value={'type'}>Type</option>
+                    <option value={'Cost'}>Cost</option>
+                    <option value={'Date'}>Date</option>
+                  </select>
+                </li>
+                <li>
+                  <input type='number' className='form-control num-of-product' value={5}/>
+                </li>
               </ul>
             </div>
             <div className="product-gallery-content-product">

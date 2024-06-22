@@ -3,10 +3,6 @@
     margin: 0;
     padding: 0;
     font-family: Roboto;
-    /* background-image: url("/VIEW/assets/poster.png"); */
-    /* background-size: cover; hoặc contain để điều chỉnh kích thước hình ảnh */
-    /* background-repeat: no-repeat; */
-    /* background-position: center center; */
 }
 
 li {
@@ -16,6 +12,11 @@ li {
 a {
     text-decoration: none;
     color: #000;
+}
+
+.container {
+    overflow-x: hidden;
+    width: 100%;
 }
 
 .header {
@@ -41,7 +42,6 @@ a {
 
 .logo {
     flex: 1;
-
 }
 
 .menu {
@@ -52,15 +52,12 @@ a {
 
 .menu li {
     padding: 0px 12px;
-    list-style: none;
     position: relative;
 }
 
 .menu li a {
     font-size: 17px;
     font-weight: bold;
-    color: #000;
-    text-decoration: none;
     display: block;
     line-height: 20px;
 }
@@ -73,21 +70,6 @@ a {
 
 .others li {
     padding: 0px 12px;
-}
-
-.others li:first-child {
-    position: relative;
-}
-
-.others li:first-child input {
-    width: 100%;
-    position: relative;
-
-}
-
-.others li:first-child i {
-    position: absolute;
-
 }
 
 #list-nu:hover .sub-menu {
@@ -125,16 +107,14 @@ a {
     padding: 0 0 0 30px;
 }
 
-/* first slider */
 .aspect-ratio-169 {
-    display: block;
     position: relative;
     padding-top: 60%;
     transition: 0.3s;
+    overflow: hidden;
 }
 
 .aspect-ratio-169 img {
-    display: block;
     position: absolute;
     width: 100%;
     height: 100%;
@@ -169,38 +149,26 @@ a {
     padding-bottom: 30px;
     border-bottom: 2px solid #000;
     overflow: hidden;
+    width: 100%;
+    position: relative;
 }
 
-@media(max-width: 600px) {
+@media (max-width: 600px) {
     #slider {
-        max-width: 65%;
+        max-width: 100%;
         text-align: center;
         justify-content: center;
     }
 
     .dot-container {
-        /* position: absolute; */
         height: 20px;
-        width: 65%;
+        width: 100%;
         display: flex;
         text-align: center;
         justify-content: center;
     }
-
 }
 
-/* end */
-
-#searchInput {
-    background-color: transparent;
-
-}
-
-#searchSelect {
-    background-color: transparent;
-}
-
-/* slider-product-items */
 .first-slider-product {
     padding-top: 20px;
     height: 800px;
@@ -211,12 +179,15 @@ a {
     padding: 10px 0;
     height: 750px;
 }
-.slider-product-container{
+
+.slider-product-container {
     height: 670px;
 }
-.slider-product-items-parent{
+
+.slider-product-items-parent {
     height: 680px;
 }
+
 .slider-product-items {
     display: flex;
     justify-content: space-evenly;
@@ -228,17 +199,17 @@ a {
 .slider-product-item {
     width: 19%;
     background-color: #fff;
-    padding: 50px 12px 50px 12px;
+    padding: 50px 12px;
     margin: 5px;
     border-radius: 10px;
     cursor: pointer;
 }
 
-.slider-product-item:hover>img {
+.slider-product-item:hover > img {
     transform: translateY(-20px);
 }
 
-.slider-product-item>img {
+.slider-product-item > img {
     width: 100%;
     transition: all 0.5s ease;
 }
@@ -269,7 +240,6 @@ a {
 
 .slider-product-text li:first-child p {
     color: #fff;
-
 }
 
 .slider-product-text li:first-child img {
@@ -296,9 +266,9 @@ a {
     font-weight: bold;
 }
 
-@media(max-width:600px) {
+@media (max-width: 600px) {
     .first-slider-product {
-        max-width: 63%;
+        max-width: 100%;
         justify-content: center;
         text-align: center;
     }
@@ -317,36 +287,34 @@ a {
         justify-content: space-evenly;
         max-width: 100%;
         max-height: 19em;
-        position: absolute; 
+        position: absolute;
         left: 0;
         right: 0;
     }
 
     .slider-product-item {
-        /* width: 100px; */
         min-width: 50%;
         max-width: 180px;
         min-height: 100%;
         background-color: #fff;
-        /* padding: 50px 12px 50px; */
         border-radius: 10px;
         cursor: pointer;
         transform: translateX(-50%);
-        /* left: 0; */
-        /* max-height: 19em; */
     }
-    .slider-product-item>img{
+
+    .slider-product-item > img {
         max-height: 40%;
-        /* max-width: 30%; */
     }
-    .slider-product-text{
+
+    .slider-product-text {
         max-width: 9em;
         max-height: 50px;
     }
+
     .slider-product-text li {
         padding-bottom: 2px;
     }
-    
+
     .slider-product-text li:first-child {
         height: 20px;
         width: 70%;
@@ -358,37 +326,35 @@ a {
         border-radius: 10px;
         size: 12px;
     }
-    
+
     .slider-product-text li:first-child p {
         color: #fff;
-    
     }
-    
+
     .slider-product-text li:first-child img {
         width: 20px;
         float: left;
         margin-right: 3px;
     }
-    
+
     .slider-product-text li:last-child i {
         color: #FB6E2E;
     }
-    
+
     .slider-product-text li:nth-child(2):hover {
         color: #80D8ff;
     }
-    
+
     .slider-product-text li:nth-child(4) a {
         text-decoration: line-through;
         color: #333;
         padding-right: 5px;
     }
-    
+
     .slider-product-text li:nth-child(5) {
         font-weight: bold;
     }
 }
-
 
 /* slider product */
 .slider-product-container {
@@ -436,6 +402,39 @@ a {
 .slider-product-items:nth-child(3) {
     transform: translateX(200%);
 }
+
+.slider-product-item {
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dot-container-slider-product {
+    position: absolute;
+    bottom: 2em;
+    height: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dot-slider-product {
+    height: 10px;
+    width: 10px;
+    background-color: #ccc;
+    border-radius: 50%;
+    margin: 0 6px;
+    cursor: pointer;
+}
+
+.dot-slider-product.active {
+    background-color: #333;
+}
+
+
+
 
 
 /* ----------product-gallery--------- */
@@ -574,4 +573,16 @@ a {
     text-decoration: none;
     font-size: 12px;
     transition: all 0.3s ease;
+}
+
+
+.product-gallery-title{
+    display: flex;
+    justify-content: space-between;
+}
+.product-gallery-title ul li{
+    margin: 5px;
+}
+.num-of-product{
+    max-width: 50px;
 }
