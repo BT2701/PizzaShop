@@ -7,16 +7,22 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import 'normalize.css';
 import { initializeSlider } from '../../Static/js/homepage';
 import axios from 'axios';
+import { data } from 'autoprefixer';
 
 function ClientHome() {
   const [sanphamListnoibac, setSanphamListnoibac] = useState([]);
-
+  const [limit, setLimit]= useState(5);
+  const handleInputChange=(event)=>{
+    event.preventDefault();
+    const value=parseInt(event.target.value);
+    setLimit(value);
+  }
 
   useEffect(() => {
     const fetchData = async () => {
       try {
 
-        const sanphamNoiBacResponse = await axios.get('http://localhost:8081/api/sanphamnoibac');
+        const sanphamNoiBacResponse = await axios.get('http://localhost:8081/api/sanphamnoibac?limit='+limit);
         setSanphamListnoibac(sanphamNoiBacResponse.data);
 
       } catch (error) {
@@ -26,7 +32,7 @@ function ClientHome() {
 
     fetchData();
     initializeSlider();
-  }, []);
+  }, [limit]);
 
   return (
     <div className='container'>
@@ -60,7 +66,7 @@ function ClientHome() {
                   </select>
                 </li>
                 <li>
-                  <input type='number' className='form-control num-of-product' value={5}/>
+                  <input type='number' className='form-control num-of-product' id='number-of-product' value={limit} onChange={handleInputChange}/>
                 </li>
               </ul>
             </div>
@@ -74,7 +80,7 @@ function ClientHome() {
                     className="product-gallery-content-product-item"
                   >
                     <div className="split-img">
-                      <img src={sanpham.hinhanh} alt={sanpham.tensp} className="image-product-vip" />
+                      <img src={require('../../Static/IMG/SanPham/'+sanpham.hinhanh)} alt={sanpham.tensp} className="image-product-vip" />
                     </div>
                     <div className="product-gallery-content-product-text">
                       {sanpham.loai.tenloai && (new Date(sanpham.soluong) > new Date() || !sanpham.soluong) ? (
