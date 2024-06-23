@@ -19,7 +19,7 @@ public class SanPhamService {
         }
         return list;
     }
-    public List<SanPham> getALL() {
-        return repo.findAll();
+    public List<Object[]> getALL() {
+        return repo.getALL();
     }
 }

@@ -8,17 +8,17 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class SanPhamCTL {
     @Autowired
     private SanPhamService service;
 
     @GetMapping("/api/productList")
-    public List<SanPham> getAllProducts() {
+    public List<Object[]> getAllProducts() {
         return service.getALL();
     }
     @GetMapping("/api/sanphamnoibac")
-    @CrossOrigin(origins = "http://localhost:3000")
     public List<Object[]> danhSachSpNoiBac(@RequestParam("limit") int limit) {
         return service.danhSachSpNoiBac(limit);
     }
