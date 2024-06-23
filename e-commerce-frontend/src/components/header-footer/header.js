@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'normalize.css';
 import "../../Static/CSS/style.css";
 import '../../Static/CSS/base-style.css';
+import { Link } from 'react-router-dom';
 // import './base-style.css';
 
 const Header = () => {
@@ -74,6 +75,7 @@ const Header = () => {
 };
 
 const Navbar = () => {
+  
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container">
@@ -90,19 +92,22 @@ const Navbar = () => {
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 navbar-list">
-            <li className="nav-item dropdown navbar-item">
+            <li className="nav-item">
               <a className="nav-link" href="#" >
                 Home
               </a>
             </li>
             <li className="nav-item">
+              <Link to={'/products'} className="nav-link">Products</Link>
+            </li>
+            <li className="nav-item">
               <a className="nav-link" href="#">
-                About
+              Bestseller
               </a>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="#">
-                Contact
+              Contacts
               </a>
             </li>
             {/* Case user has been login */}

@@ -263,3 +263,19 @@
 
 
 
+/* style.css */
+.nav-link.active {
+    position: relative;
+    color: red !important;
+  }
+  
+.nav-link.active::after {
+content: '';
+position: absolute;
+width: 100%;
+height: 2px;
+background-color: red;
+bottom: -5px;
+left: 0;
+}
+  
