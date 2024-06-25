@@ -15,8 +15,11 @@ public class SanPhamCTL {
     private SanPhamService service;
 
     @GetMapping("/api/productList")
-    public List<Object[]> getAllProducts(@RequestParam("currentPage") int currentPage) {
-        return service.getALL(currentPage);
+    public List<Object[]> getAllProducts(@RequestParam("currentPage") int currentPage,
+                                         @RequestParam("productName") String productName,
+                                         @RequestParam("productType") int productType,
+                                         @RequestParam("priceRange") String priceRange) {
+        return service.getALL(currentPage, productName, productType, priceRange);
     }
     @GetMapping("/api/sanphamnoibac")
     public List<Object[]> danhSachSpNoiBac(@RequestParam("limit") int limit) {
