@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import '../../Static/CSS/index.css';
 import '../../Static/CSS/category.css';
+import Pagination from '../custom/pagination';
 
 const Client_Products = () => {
   const [products, setProducts] = useState([]);
@@ -11,6 +12,13 @@ const Client_Products = () => {
   const [selectedCategory, setSelectedCategory] = useState('Tất cả sản phẩm');
   const [priceRange, setPriceRange] = useState('Tất cả mệnh giá');
   const [searchTerm, setSearchTerm] = useState('');
+  const [currentPage, setCurrentPage] =useState(1);
+  const [numOfProduct, setNumOfProduct]=useState(1);
+  // phân trang (1 trang có 15 sản phẩm)
+  const totalPages = Math.ceil(numOfProduct / 15);
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
 
   function formatCurrency(amount) {
     return amount.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
@@ -18,9 +26,10 @@ const Client_Products = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const productsResponse = await axios.get('http://localhost:8081/api/productList'); // Thay bằng API thực tế của bạn
+        const productsResponse = await axios.get('http://localhost:8081/api/productList?currentPage='+currentPage); // Thay bằng API thực tế của bạn
         const categoriesResponse = await axios.get('http://localhost:8081/api/loai'); // Thay bằng API thực tế của bạn
-
+        const numOfProductData= await axios.get('http://localhost:8081/api/numOfProduct');
+        setNumOfProduct(numOfProductData.data);
         setProducts(productsResponse.data);
         setCategories(categoriesResponse.data);
       } catch (error) {
@@ -29,7 +38,7 @@ const Client_Products = () => {
     };
 
     fetchData();
-  }, []);
+  }, [currentPage]);
 
   const handleCategoryChange = (event) => {
     setSelectedCategory(event.target.value);
@@ -142,6 +151,13 @@ const Client_Products = () => {
           </nav>
         </div>
       </section>
+      <div>
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+      />
+    </div>
     </div>
   );
 };
