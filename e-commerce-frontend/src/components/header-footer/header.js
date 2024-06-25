@@ -14,22 +14,13 @@ const Header = () => {
         <div className="row d-flex align-items-center container-fluid">
           {/* Logo */}
           <div className="col-lg-4 col-6 web-logo">
-            <a href="#">LuxeLoom</a>
+            <a href="#">Pizza Shop</a>
           </div>
 
           {/* Search Bar */}
           <div className="col-lg-4 d-lg-block d-none search-bar">
             <div className="input-group">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Search"
-                aria-label="Search"
-                aria-describedby="searchButton"
-              />
-              <button className="btn btn-outline-secondary bg-dark" type="button" id="searchButton">
-                <i className="fas fa-search"></i>
-              </button>
+              
             </div>
           </div>
 
@@ -93,7 +84,7 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 navbar-list">
             <li className="nav-item">
-              <a className="nav-link" href="#" >
+              <a className="nav-link" href="/homepage" >
                 Home
               </a>
             </li>

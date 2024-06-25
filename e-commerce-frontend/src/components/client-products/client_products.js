@@ -8,12 +8,12 @@ import Pagination from '../custom/pagination';
 
 const Client_Products = () => {
   const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState('Tất cả sản phẩm');
-  const [priceRange, setPriceRange] = useState('Tất cả mệnh giá');
-  const [searchTerm, setSearchTerm] = useState('');
+  const [categories, setCategories] = useState([]); 
   const [currentPage, setCurrentPage] =useState(1);
   const [numOfProduct, setNumOfProduct]=useState(1);
+  const[productName, setProductName]=useState('');
+  const[productType, setProductType]= useState(-1);
+  const[priceRange, setPriceRange]= useState('Tất cả mệnh giá');
   // phân trang (1 trang có 15 sản phẩm)
   const totalPages = Math.ceil(numOfProduct / 15);
   const handlePageChange = (page) => {
@@ -26,11 +26,8 @@ const Client_Products = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const productsResponse = await axios.get('http://localhost:8081/api/productList?currentPage='+currentPage); // Thay bằng API thực tế của bạn
-        const categoriesResponse = await axios.get('http://localhost:8081/api/loai'); // Thay bằng API thực tế của bạn
-        const numOfProductData= await axios.get('http://localhost:8081/api/numOfProduct');
-        setNumOfProduct(numOfProductData.data);
-        setProducts(productsResponse.data);
+
+        const categoriesResponse = await axios.get('http://localhost:8081/api/loai');
         setCategories(categoriesResponse.data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -38,10 +35,29 @@ const Client_Products = () => {
     };
 
     fetchData();
-  }, [currentPage]);
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const productsResponse = await axios.get('http://localhost:8081/api/productList?currentPage='+currentPage+'&productName='+productName+'&productType='+productType+'&priceRange='+priceRange); // Thay bằng API thực tế của bạn
+         // Thay bằng API thực tế của bạn
+        
+        setProducts(productsResponse.data);
+
+        
+        const numOfProductData= await axios.get('http://localhost:8081/api/numOfProduct');
+        setNumOfProduct(numOfProductData.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, [currentPage, productName, productType, priceRange]);
 
   const handleCategoryChange = (event) => {
-    setSelectedCategory(event.target.value);
+    setProductType(event.target.value);
   };
 
   const handlePriceRangeChange = (event) => {
@@ -49,31 +65,9 @@ const Client_Products = () => {
   };
 
   const handleSearchChange = (event) => {
-    setSearchTerm(event.target.value);
+    setProductName(event.target.value);
   };
 
-  const filteredProducts = products.filter((product) => {
-    return (
-      (selectedCategory === 'Tất cả sản phẩm' || product[0].loai.maloai === selectedCategory) &&
-      (priceRange === 'Tất cả mệnh giá' || isInPriceRange(product[0].dongia, priceRange)) &&
-      product[0].tensp.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-  });
-
-  const isInPriceRange = (price, range) => {
-    switch (range) {
-      case 'From 0 to 100000':
-        return price <= 100000;
-      case 'From 100000 to 200000':
-        return price > 100000 && price <= 200000;
-      case 'From 200000 to 500000':
-        return price > 200000 && price <= 500000;
-      case 'From 500000 to 2147483647':
-        return price > 500000;
-      default:
-        return true;
-    }
-  };
 
   return (
     <div className="container">
@@ -90,7 +84,7 @@ const Client_Products = () => {
               aria-label="Search"
               aria-describedby="searchButton"
               id="searchInput"
-              value={searchTerm}
+              value={productName}
               onChange={handleSearchChange}
             />
             <button className="btn btn-outline-secondary bg-dark" type="button" id="searchButton">
@@ -99,7 +93,7 @@ const Client_Products = () => {
           </div>
           <div className="category-right-top-items">
             <select name="" id="" onChange={handleCategoryChange}>
-              <option value="Tất cả sản phẩm">Tất cả sản phẩm</option>
+              <option value="-1">Tất cả sản phẩm</option>
               {categories.map((cate) => (
                 <option key={cate.maloai} value={cate.maloai}>
                   {cate.tenloai}
@@ -110,16 +104,18 @@ const Client_Products = () => {
           <div className="category-right-top-items">
             <select name="" id="" onChange={handlePriceRangeChange}>
               <option value="Tất cả mệnh giá">Tất cả mệnh giá</option>
-              <option value="From 0 to 100000">0 đến 100.000</option>
-              <option value="From 100000 to 200000">100.000 đến 200.000</option>
-              <option value="From 200000 to 500000">200.000 đến 500.000</option>
-              <option value="From 500000 to 2147483647">500.000 đến ...</option>
+              <option value="0-100000">0 đến 100.000</option>
+              <option value="100000-200000">100.000 đến 200.000</option>
+              <option value="200000-500000">200.000 đến 500.000</option>
+              <option value="500000-2147483647">500.000 đến ...</option>
             </select>
           </div>
         </div>
         <div className="product-gallery-content-product" id="productList">
-          {filteredProducts.length ? (
-            filteredProducts.map((sanpham) => (
+          {products.length === 0 ? (
+                <p>Không có sản phẩm nào</p>
+              ) : (
+            products.map((sanpham) => (
                 <div
                 key={sanpham[0].masp}
                 className="product-gallery-content-product-item"
@@ -141,9 +137,7 @@ const Client_Products = () => {
                 </div>
               </div>
             ))
-          ) : (
-            <p>không có sản phẩm nào</p>
-          )}
+          ) }
         </div>
         <div className="category-bottom">
           <nav aria-label="Page navigation">
