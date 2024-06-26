@@ -73,4 +73,7 @@ public class SanPhamService {
     public int numOfProduct(){
         return productNumber;
     }
+    public SanPham getById(Integer id) {
+        return repo.findById(id).orElse(null);
+    }
 }

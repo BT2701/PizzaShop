@@ -29,5 +29,9 @@ public class SanPhamCTL {
     public int getNumOfProduct() {
         return service.numOfProduct();
     }
+    @GetMapping("/api/product")
+    public SanPham getSanPham(@RequestParam("productId") int id) {
+        return service.getById(id);
+    }
 
 }

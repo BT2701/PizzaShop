@@ -89,4 +89,5 @@ public interface SanPhamRepo extends JpaRepository<SanPham, Integer> {
     public List<Object[]> filterByPrice(@Param("from") int from,
                                                 @Param("to") int to );
 
+
 }
