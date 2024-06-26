@@ -5,6 +5,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import '../../Static/CSS/index.css';
 import '../../Static/CSS/category.css';
 import Pagination from '../custom/pagination';
+import ProductDetail from './productDetail';
 
 const Client_Products = () => {
   const [products, setProducts] = useState([]);
@@ -14,12 +15,19 @@ const Client_Products = () => {
   const[productName, setProductName]=useState('');
   const[productType, setProductType]= useState(-1);
   const[priceRange, setPriceRange]= useState('Tất cả mệnh giá');
+  const[productId, setProductID]=useState(1);
+  const[showModal, setShowModal]=useState(false);
+  const[salerProduct, setSalerProduct]= useState(0);
   // phân trang (1 trang có 15 sản phẩm)
   const totalPages = Math.ceil(numOfProduct / 15);
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
-
+  function showDetailModal(id, saler){
+    setProductID(id);
+    setSalerProduct(saler);
+    setShowModal(true);
+  }
   function formatCurrency(amount) {
     return amount.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
   }
@@ -118,7 +126,7 @@ const Client_Products = () => {
             products.map((sanpham) => (
                 <div
                 key={sanpham[0].masp}
-                className="product-gallery-content-product-item"
+                className="product-gallery-content-product-item" onClick={()=>showDetailModal(sanpham[0].masp, sanpham[1])}
               >
                 <div className="split-img">
                   <img src={require('../../Static/IMG/SanPham/'+sanpham[0].hinhanh)} alt={sanpham[0].tensp} className="image-product-vip" />
@@ -146,6 +154,10 @@ const Client_Products = () => {
         </div>
       </section>
       <div>
+        <ProductDetail
+        productId={productId}
+        showModal={showModal}
+        saler={salerProduct}/>
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
