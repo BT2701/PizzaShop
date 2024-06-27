@@ -29,4 +29,8 @@ public class KhachHang {
     private TaiKhoan taikhoan;
     @OneToOne(mappedBy = "khachhang")
     private GioHang giohang;
+    @Column
+    private String email;
+    @Column
+    private String sdt;
 }
