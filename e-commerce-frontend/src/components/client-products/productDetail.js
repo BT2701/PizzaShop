@@ -10,6 +10,9 @@ const ProductDetail = ({ productId, showModal, saler }) => {
   const [quantity, setQuantity] = useState(1);
   const [modal, setShowModal] = useState(false);
 
+  function formatCurrency(amount) {
+    return amount.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+  }
   useEffect(() => {
     // Fetch product details here
     axios.get(`http://localhost:8081/api/product?productId=${productId}`).then((response) => {
@@ -62,31 +65,18 @@ const ProductDetail = ({ productId, showModal, saler }) => {
                     {detailProduct.tensp}
                   </span>
                   <div className="product-info">
-                    <div className="rating-info">
-                      <a href="#user-evaluate-container" className="number-rating">
-                        {/* {detailProduct.avgEvaluate.toFixed(1)} */}
-                      </a>
-                      <div className="avarage-star-container"></div>
-                    </div>
-                    <span className="sperate"></span>
-                    {/* <div className="feedback">
-                      <a href="#user-evaluate-container" className="number-feedback">
-                        {detailProduct.quantityEvaluateAll}
-                      </a>
-                      Đánh giá
-                    </div> */}
-                    <span className="sperate"></span>
+                    
                     <div className="sold">
                       {saler} Đã bán
                     </div>
                   </div>
                   <div className="product-price">
                     <div className="has-discount">
-                      <div className="original-price">
+                      {/* <div className="original-price">
                         {detailProduct.dongia !== 0 && `${detailProduct.dongia}đ`}
-                      </div>
+                      </div> */}
                       <div className="discount-price">
-                        {detailProduct.dongia}đ
+                        {formatCurrency(detailProduct.dongia)}
                       </div>
                       {/* <div className="percent-discount">
                         {detailProduct.valueDiscount !== 0 && `${detailProduct.valueDiscount}% GIẢM`}
@@ -123,11 +113,12 @@ const ProductDetail = ({ productId, showModal, saler }) => {
                       Mua ngay
                     </button>
                   </div>
-                  <div className="case-none-quantity">
-                    <div className="alert alert-info mt-3" role="alert">
-                      Sản phẩm đã hết hàng !
-                    </div>
-                  </div>
+                  {detailProduct.soluong == 0 ?(<div className="case-none-quantity">
+                      <div className="alert alert-info mt-3" role="alert">
+                        Sản phẩm đã hết hàng !
+                      </div>
+                    </div>):null
+                  }
                 </div>
               </div>
             </div>
