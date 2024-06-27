@@ -3,113 +3,52 @@ import "../../Static/CSS/login.css";
 import { Link } from 'react-router-dom';
 
 
+
 const Login = () => {
-  const [maTV, setMaTV] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const [usernameError, setUsernameError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
-
-  const validateForm = () => {
-    let valid = true;
-    if (!maTV) {
-      setUsernameError('Mã thành viên là bắt buộc');
-      valid = false;
-    } else {
-      setUsernameError('');
-    }
-
-    if (!password) {
-      setPasswordError('Mật khẩu là bắt buộc');
-      valid = false;
-    } else {
-      setPasswordError('');
-    }
-
-    return valid;
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (validateForm()) {
-      // Submit the form
-      console.log('Form submitted');
-    }
-  };
 
   return (
-    <section className="login-page container-fluid">
-      <div className="row d-flex justify-content-center">
-        <div className="col-lg-6 intro-side">
-          <h2 className="text-center">Chào mừng đến với trang đăng nhập</h2>
-          <p>Hệ thống quản lý cho mượn thiết bị NHÓM 2</p>
-        </div>
-        <div className="col-lg-6 login-side">
-          <h2 className="text-center mb-4">Đăng nhập</h2>
-          <form onSubmit={handleSubmit}>
-            <div className="mb-3">
-              <div>
-                <label htmlFor="maTV" className="form-label">Mã thành viên</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="maTV"
-                  name="maTV"
-                  placeholder="11xxxxxxxx"
-                  value={maTV}
-                  onChange={(e) => setMaTV(e.target.value)}
-                />
-              </div>
-              <div className="error">
-                <div id="usernameError" className="error-message" style={{ color: 'red', marginBottom: '3%' }}>
-                  {usernameError}
+    <div className="container">
+            <img src={require('../../Static/IMG/pizzabanner.png')} alt="BT Shop" className="img-fluid my-4 darken-img" />
+            <div className="card login">
+                <div className="card-body">
+                    <h2 className="card-title login-title">Log In</h2>
+                    <form>
+                        <div className="login-content">
+                            <div className="form-group">
+                                <label htmlFor="user-name">User name <span className="text-danger">*</span></label>
+                                <input type="text" className="form-control" id="user-name" required placeholder="ID/Email/Phone number" />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="password">Password <span className="text-danger">*</span></label>
+                                <input type="password" className="form-control" id="password" required placeholder="********" />
+                            </div>
+                            <div className="form-group text-right">
+                                <a href="#">Forgot password?</a>
+                            </div>
+                            <div className="login-btn">
+                                <button className="btn-login btn btn-primary">
+                                    Log In
+                                </button>
+                            </div>
+                        </div>
+                        <div className="login-footer">
+                            <h6>Sign in another way</h6>
+                            <div className="form-group control-button">
+                                <button type="button" className="btn btn-danger ">
+                                    <i className="fab fa-google"></i> Google
+                                </button>
+                                <button type="button" className="btn btn-primary ">
+                                    <i className="fab fa-facebook-f"></i> Facebook
+                                </button>
+                                <button type="button" className="btn btn-secondary ">
+                                    <i className="fas fa-user"></i> Guest
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-              </div>
             </div>
-            <div className="mb-3">
-              <div>
-                <label htmlFor="password" className="form-label">Mật khẩu</label>
-                <input
-                  type={showPassword ? 'text' : 'password'}
-                  className="form-control"
-                  id="password"
-                  name="password"
-                  placeholder="Mật khẩu"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
-              <div className="error">
-                <div id="passwordError" className="error-message" style={{ color: 'red', marginBottom: '3%' }}>
-                  {passwordError}
-                </div>
-              </div>
-            </div>
-            <input
-              type="checkbox"
-              id="showPasswordCheckbox"
-              checked={showPassword}
-              onChange={() => setShowPassword(!showPassword)}
-            />
-            <label style={{ fontWeight: 'bold' }}>Hiện mật khẩu</label>
-            <div className="mb-4">
-              <a href="./forgot-password">Quên mật khẩu</a>
-            </div>
-            <div className="form-operation">
-              <div className="text-center mb-3">
-                <Link to ="/homepage" className="btn btn-primary btn-login">Đăng nhập</Link>
-              </div>
-              <div className="text-center mb-3">
-                <Link to="/register" className="btn btn-primary btn-register">Đăng ký</Link>
-              </div>
-            </div>
-            <div className="alert alert-danger" role="alert">
-              {/* Display error message here if needed */}
-            </div>
-          </form>
         </div>
-      </div>
-    </section>
   );
 };
 
