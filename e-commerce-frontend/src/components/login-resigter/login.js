@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
-import "../../Static/CSS/login.css";
+import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { FaGoogle, FaFacebookF, FaUser } from 'react-icons/fa';
+import '../../Static/CSS/login.css';
 import { Link } from 'react-router-dom';
 
-
-
 const Login = () => {
-
-  return (
-    <div className="container">
+    return (
+        <div className="container-login-register">
             <img src={require('../../Static/IMG/pizzabanner.png')} alt="BT Shop" className="img-fluid my-4 darken-img" />
             <div className="card login">
                 <div className="card-body">
@@ -22,26 +21,30 @@ const Login = () => {
                                 <label htmlFor="password">Password <span className="text-danger">*</span></label>
                                 <input type="password" className="form-control" id="password" required placeholder="********" />
                             </div>
-                            <div className="form-group text-right">
-                                <a href="#">Forgot password?</a>
+                            <div className="form-group text-end">
+                                <Link to={"/forgot"}  className='text-primary'>Forgot password?</Link>
                             </div>
                             <div className="login-btn">
-                                <button className="btn-login btn btn-primary">
-                                    Log In
-                                </button>
+                                <Link to={"/homepage"} className="btn-login btn btn-primary">Log in</Link>
+                            </div>
+                            <div className='form-group sign-up'>
+                                <label>
+                                You're new to BT Shop, right?
+                                </label>
+                                <Link to={"/register"} className='text-danger'>Sign up</Link>
                             </div>
                         </div>
                         <div className="login-footer">
                             <h6>Sign in another way</h6>
                             <div className="form-group control-button">
-                                <button type="button" className="btn btn-danger ">
-                                    <i className="fab fa-google"></i> Google
+                                <button type="button" className="btn btn-danger">
+                                    <FaGoogle /> Google
                                 </button>
-                                <button type="button" className="btn btn-primary ">
-                                    <i className="fab fa-facebook-f"></i> Facebook
+                                <button type="button" className="btn btn-primary">
+                                    <FaFacebookF /> Facebook
                                 </button>
-                                <button type="button" className="btn btn-secondary ">
-                                    <i className="fas fa-user"></i> Guest
+                                <button type="button" className="btn btn-secondary">
+                                    <FaUser /> Guest
                                 </button>
                             </div>
                         </div>
@@ -49,7 +52,7 @@ const Login = () => {
                 </div>
             </div>
         </div>
-  );
+    );
 };
 
 export default Login;

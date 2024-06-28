@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import "../../Static/CSS/Forgot.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 
 const ForgotPassword = () => {
@@ -24,9 +26,9 @@ const ForgotPassword = () => {
     };
 
     return (
-        <div className="container">
+        <div className="container-login-register">
         <img src={require("../../Static/IMG/pizzabanner.png")} alt="BT Shop" className="img-fluid my-4 darken-img" />
-        <div className="card login">
+        <div className="card forgot">
                 <div className="card-body">
                     <h2 className="card-title login-title">Forgot Password</h2>
                     {step === 1 && (

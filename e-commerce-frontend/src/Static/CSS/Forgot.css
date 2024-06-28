@@ -1,21 +1,21 @@
-body{
-    overflow: hidden;
-    font-family: 'Open Sans', sans-serif;
-}
-.container{
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Open+Sans:wght@400;600&display=swap');
+
+
+.container-login-register{
     max-width: 100vw;
     max-height: 100vh;
     overflow: hidden;
     background-color: rgba(38, 48, 18, 0.9);
+    font-family: 'Open Sans', sans-serif;
 }
-.container img{
+.container-login-register img{
     width: 100%;
     height: 100vh;
     overflow-y: hidden;
     position: fixed;
     z-index: -1;
 }
-.login{
+.forgot{
     display: flex;
     flex-direction: column;
     justify-content: left;
@@ -24,7 +24,7 @@ body{
     max-height: 50%;
     height: 100%;
     position: absolute;
-    top: 15%;
+    top: 25%;
     left: 35%;
     background-color: rgba(211, 211, 211, 0.8);
     border-radius: 2em;
@@ -58,9 +58,7 @@ body{
     display: flex;
     justify-content: space-between !important;
 }
-.btn{
-    margin: 1em;
-}
+
 .darken-img {
     filter: brightness(40%);
 }

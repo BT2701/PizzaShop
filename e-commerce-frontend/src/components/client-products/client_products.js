@@ -93,7 +93,7 @@ const Client_Products = () => {
               aria-describedby="searchButton"
               id="searchInput"
               value={productName}
-              onChange={handleSearchChange}
+              onChange={handleSearchChange} 
             />
             <button className="btn btn-outline-secondary bg-dark" type="button" id="searchButton">
               <i className="fas fa-search"></i>

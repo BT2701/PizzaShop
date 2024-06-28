@@ -2,13 +2,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import "../../Static/CSS/Register.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 
 function Register() {
   return (
-    <div className="container">
+    <div className="container-login-register">
         <img src={require("../../Static/IMG/pizzabanner.png")} alt="BT Shop" className="img-fluid my-4 darken-img" />
-        <div className="card login">
+        <div className="card register">
             <div className="card-body">
                 <h2 className="card-title login-title">Register</h2>
                 <form>
@@ -33,14 +35,18 @@ function Register() {
                             <label htmlFor="confirm-password">Repeat password <span className="text-danger">*</span></label>
                             <input type="password" className="form-control" id="confirm-password" required placeholder="********" />
                         </div>
-                        <div className="form-group text-right">
-                            <a href="#">Forgot password?</a>
-                        </div>
+                        
                         <div className="login-btn">
                             <button className="btn-login btn btn-primary">
                                 Create
                             </button>
                         </div>
+                        <div className='form-group sign-up'>
+                                <label>
+                                Have an account?
+                                </label>
+                                <Link to={"/login"} className='text-danger'>Log in</Link>
+                            </div>
                     </div>
                     <div className="login-footer">
                         <h6>Sign in another way</h6>
