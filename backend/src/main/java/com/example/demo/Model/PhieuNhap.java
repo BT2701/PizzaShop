@@ -13,9 +13,11 @@ public class PhieuNhap {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer mapn;
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "mancc")
     private NhaCungCap nhacungcap;
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "manv")
     private NhanVien nhanvien;

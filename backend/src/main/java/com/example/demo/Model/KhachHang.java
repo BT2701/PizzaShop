@@ -25,7 +25,7 @@ public class KhachHang {
     @JsonIgnore // để tránh vòng lặp vô hạn khi lấy dữ liệu
     @OneToMany(mappedBy = "khachhang")
     private List<HoaDon> hoaDonList;
-    @OneToOne(mappedBy = "khachhang")
+    @OneToOne(mappedBy = "khachhang",fetch = FetchType.LAZY)
     private TaiKhoan taikhoan;
     @OneToOne(mappedBy = "khachhang")
     private GioHang giohang;
