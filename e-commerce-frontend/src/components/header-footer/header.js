@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 const Header = () => {
   return (
     <header className="header-style">
-      <div className="container">
+      <div className="container-header">
         <div className="row d-flex align-items-center container-fluid">
           {/* Logo */}
           <div className="col-lg-4 col-6 web-logo">
