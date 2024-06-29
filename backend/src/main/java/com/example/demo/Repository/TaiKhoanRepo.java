@@ -9,10 +9,14 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TaiKhoanRepo extends JpaRepository<TaiKhoan, Integer> {
-    @Query ("select tk from taikhoan tk where tk.username = :username and tk.matkhau = :password")
-    public TaiKhoan loginByUsername(@Param("username")String username, @Param("password")String password);
-    @Query("select tk from taikhoan tk inner join khachhang kh on tk.khachhang.makh = kh.makh where kh.email=:email and tk.matkhau=:password")
-    public TaiKhoan loginByEmail(@Param("email")String email, @Param("password")String password);
+    @Query ("select kh from taikhoan tk " +
+            "inner join khachhang kh on tk.khachhang.makh = kh.makh " +
+            "where tk.username = :username and tk.matkhau = :password")
+    public Object loginByUsername(@Param("username")String username, @Param("password")String password);
+    @Query("select kh from taikhoan tk " +
+            "inner join khachhang kh on tk.khachhang.makh = kh.makh " +
+            "where kh.email=:email and tk.matkhau=:password")
+    public Object loginByEmail(@Param("email")String email, @Param("password")String password);
     @Query("select tk from taikhoan tk inner join khachhang kh on tk.khachhang.makh=kh.makh where kh.sdt=:phonenumber and tk.matkhau=:password")
-    public TaiKhoan loginByPhonenumber(@Param("phonenumber")String phonenumber, @Param("password")String password);
+    public Object loginByPhonenumber(@Param("phonenumber")String phonenumber, @Param("password")String password);
 }

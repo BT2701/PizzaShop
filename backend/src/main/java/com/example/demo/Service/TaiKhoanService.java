@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class TaiKhoanService {
     @Autowired
     private TaiKhoanRepo repo;
-    public TaiKhoan login(String username, String password) {
+    public Object login(String username, String password) {
         if(username.contains("@")){
             return repo.loginByEmail(username, password);
         }
@@ -19,6 +19,13 @@ public class TaiKhoanService {
         else {
             return repo.loginByUsername(username, password);
         }
+    }
+    public boolean loginSuccessful(String username, String password) {
+        if (login(username, password)!=null){
+            return true;
+        }
+        else
+            return false;
     }
     public static boolean isInteger(String s) {
         if (s == null || s.isEmpty()) {

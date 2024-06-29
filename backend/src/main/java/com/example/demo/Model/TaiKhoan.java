@@ -21,7 +21,7 @@ public class TaiKhoan {
     private KhachHang khachhang;
     @Column
     private String matkhau;
-    @JsonIgnore
+
     @ManyToOne
     @JoinColumn(name = "quyen")
     private PhanQuyen phanquyen;
