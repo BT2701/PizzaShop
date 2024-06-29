@@ -8,9 +8,11 @@ import Register from './components/login-resigter/Register';
 import Client_Home from './components/client-home/client_home';
 import ForgotPassword from './components/login-resigter/Forgot';
 import Client_Products from './components/client-products/client_products';
+import { UserProvider } from './components/login-resigter/UserContext';
 
 const App = () => {
     return (
+        <UserProvider>
         <Router>
             <Routes>
                 <Route path="/" element={<Navigate to="/login" />} />
@@ -20,6 +22,7 @@ const App = () => {
                 <Route path="/*" element={<MainApp />} />
             </Routes>
         </Router>
+        </UserProvider>
     );
 };
 

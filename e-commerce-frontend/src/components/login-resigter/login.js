@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FaGoogle, FaFacebookF, FaUser } from 'react-icons/fa';
 import '../../Static/CSS/login.css';
@@ -6,34 +6,39 @@ import { Link } from 'react-router-dom';
 import LoginModal from './Notification';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from './UserContext';
 
 const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [account, setAccount] = useState([]);
+    const [account, setAccount] = useState(null);
     const [modalContent, setModalContent] = useState({ message: '', success: false });
     const [showModal, setShowModal] = useState(false);
+    const { setUser } = useContext(UserContext);
     const navigate = useNavigate();
     const login = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.get('http://localhost:8081/api/login', {
+            const response = await axios.post('http://localhost:8081/api/login', null, {
                 params: {
                     username: username,
                     password: password
-                }
+                },
+                withCredentials: true // Đảm bảo rằng cookie session được gửi
             });
-            setAccount(response.data);
-            if (response.data.length === 0) {
-                setModalContent({ message: 'Login Failed!', success: false });
-            } else {
+
+            if (response.data.user) {
+                setUser(response.data.user);
                 setModalContent({ message: 'Login Succeeded!', success: true });
                 setTimeout(() => {
-                    navigate('/homepage');
+                    navigate('/homepage', { state: { message: 'Hello from HomePage!' } });
                 }, 2000);
+            } else {
+                setModalContent({ message: 'Login Failed!', success: false });
             }
         } catch (error) {
             console.error('Error fetching data:', error);
+            setModalContent({ message: 'An error occurred. Please try again.', success: false });
         } finally {
             setShowModal(true);
         }

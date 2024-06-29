@@ -1,13 +1,17 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'normalize.css';
 import "../../Static/CSS/style.css";
 import '../../Static/CSS/base-style.css';
 import { Link } from 'react-router-dom';
+import { UserContext } from '../login-resigter/UserContext';
+import axios from 'axios';
 // import './base-style.css';
 
 const Header = () => {
+  const { user, setUser } = useContext(UserContext);
+  
   return (
     <header className="header-style">
       <div className="container-header">
@@ -34,7 +38,7 @@ const Header = () => {
 
               <div className="user-info_wrapper">
                 <i className="fa-solid fa-user circle-bg-icon"></i>
-                <span className="user-name">Truong</span>
+                <span className="user-name">{user.ho+" " +user.ten}</span>
 
                 <div className="user-actions">
                   <ul className="user-action_list">
