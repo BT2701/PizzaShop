@@ -19,11 +19,10 @@ const Login = () => {
     const login = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8081/api/login', null, {
-                params: {
-                    username: username,
-                    password: password
-                },
+            const response = await axios.post('http://localhost:8081/api/login',{
+                username: username,
+                password: password
+            }, {
                 withCredentials: true // Đảm bảo rằng cookie session được gửi
             });
 
