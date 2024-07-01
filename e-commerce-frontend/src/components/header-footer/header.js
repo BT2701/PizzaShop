@@ -7,10 +7,32 @@ import '../../Static/CSS/base-style.css';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../login-resigter/UserContext';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 // import './base-style.css';
 
 const Header = () => {
   const { user, setUser } = useContext(UserContext);
+    const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const checkSession = async () => {
+            try {
+                const response = await axios.get('http://localhost:8081/api/session', { withCredentials: true });
+                if (response.data.authenticated) {
+                    setUser(response.data.user);
+                } else {
+                    navigate('/login'); // Chuyển hướng đến trang đăng nhập nếu không xác thực
+                }
+            } catch (error) {
+                console.error('Error checking session:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        checkSession();
+    }, [setUser, navigate]);
   
   return (
     <header className="header-style">

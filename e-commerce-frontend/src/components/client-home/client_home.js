@@ -11,6 +11,7 @@ import { data } from 'autoprefixer';
 
 function ClientHome() {
   const [sanphamListnoibac, setSanphamListnoibac] = useState([]);
+  const [selectedValue, setSelectedValue] = useState('Fillters');
   const [limit, setLimit]= useState(5);
   const handleInputChange=(event)=>{
     event.preventDefault();
@@ -62,8 +63,7 @@ function ClientHome() {
               <h2>SẢN PHẨM NỔI BẬT NHẤT</h2>
               <ul style={{ display: 'flex'}}>
                 <li>
-                  <select className='form-select' >
-                    <option disabled selected hidden>Filters</option>
+                  <select className='form-select' value={selectedValue}>
                     <option value={'type'}>Type</option>
                     <option value={'Cost'}>Cost</option>
                     <option value={'Date'}>Date</option>

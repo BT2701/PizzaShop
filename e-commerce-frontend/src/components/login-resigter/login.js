@@ -11,33 +11,28 @@ import { UserContext } from './UserContext';
 const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [account, setAccount] = useState(null);
+    const [account, setAccount] = useState([]);
     const [modalContent, setModalContent] = useState({ message: '', success: false });
     const [showModal, setShowModal] = useState(false);
     const { setUser } = useContext(UserContext);
+
     const navigate = useNavigate();
     const login = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8081/api/login',{
-                username: username,
-                password: password
-            }, {
-                withCredentials: true // Đảm bảo rằng cookie session được gửi
-            });
-
-            if (response.data.user) {
+            const response = await axios.post('http://localhost:8081/api/login?username='+username+'&password='+password,{withCredentials: true});
+            setAccount(response.data.user);
+            if (response.data.length === 0) {
+                setModalContent({ message: 'Login Failed!', success: false });
+            } else {
                 setUser(response.data.user);
                 setModalContent({ message: 'Login Succeeded!', success: true });
                 setTimeout(() => {
-                    navigate('/homepage', { state: { message: 'Hello from HomePage!' } });
+                    navigate('/homepage');
                 }, 2000);
-            } else {
-                setModalContent({ message: 'Login Failed!', success: false });
             }
         } catch (error) {
             console.error('Error fetching data:', error);
-            setModalContent({ message: 'An error occurred. Please try again.', success: false });
         } finally {
             setShowModal(true);
         }
