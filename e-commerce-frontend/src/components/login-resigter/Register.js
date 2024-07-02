@@ -1,43 +1,71 @@
 // Register.js
-import React from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import "../../Static/CSS/Register.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useNavigate } from 'react-router-dom';
+import { UserContext } from './UserContext';
+import LoginModal from './Notification';
+import axios from 'axios';
 
 
 
 function Register() {
+    const [fullname, setFullname]= useState("");
+    const [email, setEmail]=useState("");
+    const [password, setPassword]=useState("");
+    const [phone, setPhone]=useState(""); 
+    const [repeat, setRepeat]=useState("");
+    const [modalContent, setModalContent] = useState({ message: '', success: false });
+    const [showModal, setShowModal] = useState(false);
+    const handleRegister= async(event)=>{
+        event.preventDefault();
+        try {
+            if(phone===repeat){
+                
+                const response = await axios.post("http://localhost:8081/api/register?fullname="+fullname+"&email="+email+"&phone="+phone+"&password"+password);
+                setModalContent({ message: 'Register Successful!', success: true });
+            }
+            else{
+                setModalContent({ message: "Passwords don't match!", success: false });
+            }
+            
+        } catch (error) {
+            
+        }
+        
+    }
   return (
     <div className="container-login-register">
         <img src={require("../../Static/IMG/pizzabanner.png")} alt="BT Shop" className="img-fluid my-4 darken-img" />
         <div className="card register">
             <div className="card-body">
                 <h2 className="card-title login-title">Register</h2>
-                <form>
+                <form onSubmit={handleRegister}>
                     <div className="login-content">
                         <div className="form-group">
                             <label htmlFor="user-name">Full name <span className="text-danger">*</span></label>
-                            <input type="text" className="form-control" id="user-name" required placeholder="Nguyen Van A" />
+                            <input type="text" className="form-control" id="user-name" required placeholder="Nguyen Van A" onChange={(e)=>setFullname(e.target.value)} />
                         </div>
                         <div className="form-group">
                             <label htmlFor="email">Email <span className="text-danger">*</span></label>
-                            <input type="email" className="form-control" id="email" required placeholder="abc@gmail.com" />
+                            <input type="email" className="form-control" id="email" required placeholder="abc@gmail.com" onChange={(e)=>setEmail(e.target.value)}/>
                         </div>
                         <div className="form-group">
                             <label htmlFor="sdt">Phone number <span className="text-danger">*</span></label>
-                            <input type="text" className="form-control" id="sdt" required placeholder="012345679" />
+                            <input type="text" className="form-control" id="sdt" required placeholder="012345679" onChange={(e)=>setPhone(e.target.value)} />
                         </div>
                         <div className="form-group">
                             <label htmlFor="password">Password <span className="text-danger">*</span></label>
-                            <input type="password" className="form-control" id="password" required placeholder="********" />
+                            <input type="password" className="form-control" id="password" required placeholder="********" onChange={(e)=>setPassword(e.target.value)}/>
                         </div>
                         <div className="form-group">
                             <label htmlFor="confirm-password">Repeat password <span className="text-danger">*</span></label>
-                            <input type="password" className="form-control" id="confirm-password" required placeholder="********" />
+                            <input type="password" className="form-control" id="confirm-password" required placeholder="********" onChange={(e)=>setRepeat(e.target.value)}/>
                         </div>
                         
                         <div className="login-btn">
-                            <button className="btn-login btn btn-primary">
+                            <button className="btn-login btn btn-primary" type='submit'>
                                 Create
                             </button>
                         </div>
@@ -65,6 +93,11 @@ function Register() {
                 </form>
             </div>
         </div>
+        <LoginModal
+                show={showModal}
+                onHide={() => setShowModal(false)}
+                content={modalContent}
+            />
     </div>
 );
 }
