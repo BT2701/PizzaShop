@@ -22,7 +22,7 @@ const Login = () => {
         try {
             const response = await axios.post('http://localhost:8081/api/login?username='+username+'&password='+password,{withCredentials: true});
             setAccount(response.data.user);
-            if (response.data.length === 0) {
+            if (response.data.user.length === 0) {
                 setModalContent({ message: 'Login Failed!', success: false });
             } else {
                 setUser(response.data.user);

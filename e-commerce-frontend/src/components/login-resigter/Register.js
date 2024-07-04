@@ -18,20 +18,32 @@ function Register() {
     const [repeat, setRepeat]=useState("");
     const [modalContent, setModalContent] = useState({ message: '', success: false });
     const [showModal, setShowModal] = useState(false);
+    const navigate = useNavigate();
     const handleRegister= async(event)=>{
         event.preventDefault();
         try {
-            if(phone===repeat){
+            if(password===repeat){
                 
-                const response = await axios.post("http://localhost:8081/api/register?fullname="+fullname+"&email="+email+"&phone="+phone+"&password"+password);
-                setModalContent({ message: 'Register Successful!', success: true });
+                const response = await axios.post("http://localhost:8081/api/register?fullname="+fullname+"&email="+email+"&phone="+phone+"&password="+password);
+                if(response.data){
+                    setModalContent({ message: 'Register Successful!', success: true });
+                    setTimeout(() => {
+                        navigate('/login');
+                    }, 2000);
+                    
+                }
+                else{
+                    setModalContent({ message: "Register Failed!", success: false });
+                }
             }
             else{
                 setModalContent({ message: "Passwords don't match!", success: false });
             }
             
         } catch (error) {
-            
+            console.error('Error fetching data:', error);
+        } finally {
+            setShowModal(true);
         }
         
     }
@@ -79,13 +91,13 @@ function Register() {
                     <div className="login-footer">
                         <h6>Sign in another way</h6>
                         <div className="form-group control-button">
-                            <button type="button" className="btn btn-danger">
+                            <button type="button" className="btn btn-danger btn-socials">
                                 <i className="fab fa-google"></i> Google
                             </button>
-                            <button type="button" className="btn btn-primary">
+                            <button type="button" className="btn btn-primary btn-socials">
                                 <i className="fab fa-facebook-f"></i> Facebook
                             </button>
-                            <button type="button" className="btn btn-secondary">
+                            <button type="button" className="btn btn-secondary btn-socials">
                                 <i className="fas fa-user"></i> Guest
                             </button>
                         </div>
