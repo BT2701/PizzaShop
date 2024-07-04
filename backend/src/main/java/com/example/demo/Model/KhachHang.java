@@ -19,7 +19,7 @@ public class KhachHang {
     @Column
     private String gioitinh;
     @Column
-    private Long tongchitieu;
+    private Integer tongchitieu;
     @Column
     private Integer tinhtrang;
     @JsonIgnore // để tránh vòng lặp vô hạn khi lấy dữ liệu

@@ -18,7 +18,7 @@ public class TaiKhoanCTL {
     private TaiKhoanService service;
 
     @PostMapping("/api/login")
-    public Object login(@RequestParam("username") String username,
+    public Map<String, Object> login(@RequestParam("username") String username,
                         @RequestParam("password") String password, HttpServletRequest request) {
         HttpSession session = request.getSession();
         Map<String, Object> response = new HashMap<>();
@@ -54,5 +54,12 @@ public class TaiKhoanCTL {
 
         return response;
     }
-
+    @PostMapping("/api/register")
+    public boolean register(@RequestParam("fullname") String fullname,
+                           @RequestParam("email") String email,
+                           @RequestParam("phone") String phone,
+                           @RequestParam("password") String password
+                           ) {
+        return service.register(fullname, password, email, phone);
+    }
 }
