@@ -60,7 +60,7 @@ const Header = () => {
 
               <div className="user-info_wrapper">
                 <i className="fa-solid fa-user circle-bg-icon"></i>
-                <span className="user-name">{user.ho+" " +user.ten}</span>
+                <span className="user-name">{user?.ho + " " + user?.ten}</span>
 
                 <div className="user-actions">
                   <ul className="user-action_list">
@@ -68,7 +68,7 @@ const Header = () => {
                       <a href="#">My account</a>
                     </li>
                     <li className="user-action_list-item">
-                      <a href="#">Log out</a>
+                      <Link to={"/login"} className="nav-link">Log out</Link>
                     </li>
                   </ul>
                 </div>
@@ -136,9 +136,7 @@ const Navbar = () => {
             </li>
             <li className="nav-item d-lg-none d-flex align-items-center">
               <i className="fa-solid fa-right-to-bracket" style={{ color: 'aliceblue', marginRight: 10 }}></i>
-              <a className="nav-link" href="#">
-                Log out
-              </a>
+              <Link to={"/login"} className="nav-link">Log out</Link>
             </li>
           </ul>
         </div>
