@@ -102,11 +102,11 @@ const Client_Products = () => {
           <div className="category-right-top-items">
             <select name="" id="" onChange={handleCategoryChange}>
               <option value="-1">Tất cả sản phẩm</option>
-              {categories.map((cate) => (
+              {categories.length ===0 ?(<option>no default</option>):(categories.map((cate) => (
                 <option key={cate.maloai} value={cate.maloai}>
                   {cate.tenloai}
                 </option>
-              ))}
+              )))}
             </select>
           </div>
           <div className="category-right-top-items">

@@ -16,7 +16,7 @@ const App = () => {
         <UserProvider>
         <Router>
             <Routes>
-                <Route path="/" element={<Navigate to="/login" />} />
+                {/* <Route path="/" element={<Navigate to="/login" />} /> */}
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/forgot" element={<ForgotPassword/>}/>
@@ -33,7 +33,7 @@ const MainApp = () => {
             <Header />
             <div className="flex flex-grow">
                 <Routes>
-                    {/* <Route path="/" element={<Navigate to="/homepage" />} /> */}
+                    <Route path="/" element={<Navigate to="/homepage" />} />
                     <Route path="/homepage" element={<Client_Home />} />
                     <Route path="/products" element={<Client_Products />} />
                     <Route path='/profile' element={<Profile/>}/>
