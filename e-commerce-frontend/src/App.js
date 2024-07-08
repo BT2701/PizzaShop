@@ -9,6 +9,7 @@ import Client_Home from './components/client-home/client_home';
 import ForgotPassword from './components/login-resigter/Forgot';
 import Client_Products from './components/client-products/client_products';
 import { UserProvider } from './components/login-resigter/UserContext';
+import Profile from './components/profile/Profile';
 
 const App = () => {
     return (
@@ -35,6 +36,7 @@ const MainApp = () => {
                     {/* <Route path="/" element={<Navigate to="/homepage" />} /> */}
                     <Route path="/homepage" element={<Client_Home />} />
                     <Route path="/products" element={<Client_Products />} />
+                    <Route path='/profile' element={<Profile/>}/>
                 </Routes>
             </div>
             <Footer />

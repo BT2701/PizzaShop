@@ -65,7 +65,7 @@ const Header = () => {
                 <div className="user-actions">
                   <ul className="user-action_list">
                     <li className="user-action_list-item">
-                      <a href="#">My account</a>
+                      <Link to={"/profile"} className="nav-link">Profile</Link>
                     </li>
                     <li className="user-action_list-item">
                       <Link to={"/login"} className="nav-link">Log out</Link>

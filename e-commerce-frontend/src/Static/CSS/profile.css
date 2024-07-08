@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Open+Sans:wght@400;600&display=swap');
+
+.profile-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: 'Open Sans', sans-serif;
+    margin-bottom: 2em;
+    margin-top: 2em;
+}
+.profile-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.profile-header-left{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10%;
+    height: auto;
+}
+.profile-header-left img{
+    max-width: 100%;
+    width: 100%;
+    border-radius: 50%;
+}
+.profile-header-mid{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    width: 50%;
+    margin: 1em;
+}
+.profile-header-mid>p{
+    font-weight: bold;
+    font-size: 25px;
+}
+.profile-header-mid-fee{
+    max-width: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    text-align: center;
+}
+.profile-header-mid-fee>label{
+    font-weight: bold;
+    font-style: italic;
+    color: rgb(163, 157, 157);
+}
+.profile-header-mid-fee>p{
+    font-style: oblique;
+    color: brown;
+}
+.profile-header-right{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20%;
+}
+.profile-header-right>button>i{
+    margin-right: 0.5em;
+}
+.profile-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    margin-top: 2em;
+    margin-bottom: 1em;
+    width: 100%;
+}
+.profile-content-row{
+    display: flex;
+    padding: 1em;
+    width: 100%;
+}
+.profile-content-row>label{
+    width: 10em;
+}
+.profile-content-row>label>i{
+    margin-right: 1em;
+}
+.profile-content-row>input, .form-control{
+    border-top: 0px !important;
+    border-left: 0px !important;
+    border-right: 0px !important;
+}
+.profile-content-row>select{
+    border-top: 0px !important;
+    border-left: 0px !important;
+    border-right: 0px !important;
+}
+.profile-footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.profile-footer>button>i{
+    margin-right: 0.5em;
+}
