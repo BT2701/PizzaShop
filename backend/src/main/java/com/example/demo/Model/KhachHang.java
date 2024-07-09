@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.sql.Date;
 import java.util.List;
 
 @Entity(name="khachhang")
@@ -33,4 +34,11 @@ public class KhachHang {
     private String email;
     @Column
     private String sdt;
+    @Column
+    private String avt;
+    @Column
+    @Temporal(TemporalType.DATE)
+    private Date birth;
+    @Column
+    private String address;
 }

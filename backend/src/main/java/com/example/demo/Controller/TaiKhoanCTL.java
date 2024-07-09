@@ -21,7 +21,7 @@ public class TaiKhoanCTL {
     public Map<String, Object> login(@RequestParam("username") String username,
                         @RequestParam("password") String password, HttpServletRequest request) {
         HttpSession session = request.getSession(true);
-        session.setMaxInactiveInterval(3600);
+        session.setMaxInactiveInterval(7200);
         Map<String, Object> response = new HashMap<>();
         Object user = service.login(username, password);
 

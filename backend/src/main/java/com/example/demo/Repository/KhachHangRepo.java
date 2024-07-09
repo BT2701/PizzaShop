@@ -11,5 +11,4 @@ import org.springframework.stereotype.Repository;
 public interface KhachHangRepo extends JpaRepository<KhachHang, Integer> {
     @Query("select max (kh.makh) from khachhang kh")
     public Integer findMaxId();
-
 }
