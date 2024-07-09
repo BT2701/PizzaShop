@@ -81,6 +81,16 @@
 .profile-header-right-control>button:hover{
     background-color: antiquewhite;
 }
+.profile-change-avt{
+    position: absolute;
+    z-index: 10;
+    color: rgb(1, 18, 31);
+    top: 33%;
+    left: 10%;
+}
+.profile-change-avt:hover{
+    color: aliceblue;
+}
 .control-down, .control-up{
     cursor: pointer;
     padding: 0.25em;
