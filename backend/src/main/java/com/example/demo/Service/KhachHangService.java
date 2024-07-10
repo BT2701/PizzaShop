@@ -2,21 +2,27 @@ package com.example.demo.Service;
 
 import com.example.demo.Model.KhachHang;
 import com.example.demo.Repository.KhachHangRepo;
+import com.example.demo.Repository.TaiKhoanRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.sql.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 
 @Service
 public class KhachHangService {
     @Autowired
     private KhachHangRepo repo;
-    public boolean updateKhachHang(int makh, String avt, String email, String sdt, String gioitinh, String birth, String address, String ho, String ten) {
+    @Autowired
+    private TaiKhoanRepo taiKhoanRepo;
+    public Map<String, Object> updateKhachHang(int makh, String avt, String email, String sdt, String gioitinh, String birth, String address, String ho, String ten, int tongchitieu, String username) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date date = null;
+        Map<String, Object> response = new HashMap<>();
         try {
             date = new Date(sdf.parse(birth).getTime());
         } catch (ParseException e) {
@@ -33,13 +39,16 @@ public class KhachHangService {
         khachHang.setTinhtrang(1);
         khachHang.setHo(ho);
         khachHang.setTen(ten);
-        System.out.println(birth);
+        khachHang.setTongchitieu(tongchitieu);
+        khachHang.setTaikhoan(taiKhoanRepo.findByUsername(username));
         try {
             repo.save(khachHang);
-            return true;
+            response.put("user", khachHang);
+            response.put("checked", true);
         }
         catch (Exception e) {
-            return false;
+            response.put("checked", false);
         }
+        return response;
     }
 }

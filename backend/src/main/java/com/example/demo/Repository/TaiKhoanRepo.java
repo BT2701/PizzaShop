@@ -23,4 +23,6 @@ public interface TaiKhoanRepo extends JpaRepository<TaiKhoan, Integer> {
     public Object loginByPhonenumber(@Param("phonenumber")String phonenumber, @Param("password")String password);
 
 
+    @Query("select tk from taikhoan tk where tk.username=:username")
+    public TaiKhoan findByUsername(@Param("username")String username);
 }
