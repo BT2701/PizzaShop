@@ -13,7 +13,7 @@ const Profile = () => {
   const { user, setUser } = useContext(UserContext);
   const [isContentVisible, setIsContentVisible] = useState(false);
   const [makh, setMakh] =useState(user?.makh || 1);
-  const [avt, setAvt] = useState(user?.avt || "");
+  const [avt, setAvt] = useState(user?.avt || '../../Static/IMG/BT.png');
   const [email, setEmail] = useState(user?.email || "");
   const [sdt, setSdt] = useState(user?.sdt || "");
   const [gender, setGender] = useState(user?.gioitinh || "");
@@ -21,8 +21,9 @@ const Profile = () => {
   const [address, setAddress] = useState(user?.address || "");
   const [ho, setHo]= useState("");
   const [ten, setTen]=useState("");
-
-  let imageSrc;
+  const [tongchitieu, setTongchitieu]= useState(0);
+  const [username, setUsername]= useState(user?.taikhoan.username||"")
+  // let imageSrc;
   const fileInputRef = useRef(null);
 
   const handleButtonClick = () => {
@@ -32,18 +33,21 @@ const Profile = () => {
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
-      setAvt(file.name);
-      // console.log('Selected file:', file.name);
-      // Bạn có thể xử lý file ở đây, ví dụ: upload lên server, hiển thị xem trước, v.v.
+      const objectURL = URL.createObjectURL(file);
+      setAvt(objectURL);
+
+      // setAvt(file.name);
+
+      
     }
   };
 
-  try {
-    imageSrc = require(`../../Static/IMG/${avt}`);
-  } catch (error) {
-    console.error(error);
-    imageSrc = require('../../Static/IMG/BT.png'); // Path to the default image
-  }
+  // try {
+  //   imageSrc = require(`../../Static/IMG/${avt}`);
+  // } catch (error) {
+  //   console.error(error);
+  //   imageSrc = require('../../Static/IMG/BT.png'); // Path to the default image
+  // }
   
   function formatCurrency(amount) {
     return amount?.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
@@ -69,11 +73,15 @@ const Profile = () => {
           birth: birth,
           address: address,
           ho: ho,
-          ten: ten
+          ten: ten,
+          tongchitieu: tongchitieu,
+          username: username
         },
+        withCredentials: true
       });
-      if(response.data){
+      if(response.data.checked){
         setModalContent({ message: 'Update Successful!', success: true });
+        // setUser(response.data.user);
       }
       else{
         setModalContent({ message: 'Update Failed!', success: false });
@@ -99,6 +107,8 @@ const Profile = () => {
           setAddress(userData.address);
           setHo(userData.ho);
           setTen(userData.ten);
+          setTongchitieu(userData.tongchitieu || 0);
+          setUsername(userData.taikhoan.username);
       } else {
           setUser(null); // Chuyển hướng đến trang đăng nhập nếu không xác thực
       }
@@ -114,7 +124,7 @@ const Profile = () => {
       <form onSubmit={handledUpdate} enctype="multipart/form-data">
       <div className="profile-header row align-items-center">
         <div className="profile-header-left col-md-2 text-center">
-          <img src={imageSrc} alt="user" className="img-fluid rounded-circle" />
+          <img src={avt} alt="user" className="img-fluid rounded-circle" />
           <button class="profile-change-avt btn" onClick={handleButtonClick}><i className="fa-solid fa-arrows-rotate"></i></button>
           <input
             type="file"
