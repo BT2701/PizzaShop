@@ -23,31 +23,48 @@ const Profile = () => {
   const [ten, setTen]=useState("");
   const [tongchitieu, setTongchitieu]= useState(0);
   const [username, setUsername]= useState(user?.taikhoan.username||"")
-  // let imageSrc;
+  let imageSrc;
   const fileInputRef = useRef(null);
 
   const handleButtonClick = () => {
     fileInputRef.current.click();
   };
 
-  const handleFileChange = (event) => {
+  const handleFileChange = async (event) => {
     const file = event.target.files[0];
     if (file) {
-      const objectURL = URL.createObjectURL(file);
-      setAvt(objectURL);
+      const formData = new FormData();
+      formData.append('avt', file);
+      formData.append('makh', makh);
 
-      // setAvt(file.name);
-
-      
+      try {
+        const response = await axios.post('http://localhost:8081/api/upload', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+          withCredentials: true,
+        });
+        if (response.data.success) {
+          setAvt(response.data.filename);
+          setModalContent({ message: 'Upload Successful!', success: true });
+        } else {
+          setModalContent({ message: 'Upload Failed!', success: false });
+        }
+        setShowModal(true);
+      } catch (error) {
+        console.error('Error uploading file:', error);
+        setModalContent({ message: 'Upload Failed!', success: false });
+        setShowModal(true);
+      }
     }
   };
 
-  // try {
-  //   imageSrc = require(`../../Static/IMG/${avt}`);
-  // } catch (error) {
-  //   console.error(error);
-  //   imageSrc = require('../../Static/IMG/BT.png'); // Path to the default image
-  // }
+  try {
+    imageSrc = require(`../../Static/IMG/${avt}`);
+  } catch (error) {
+    console.error(error);
+    imageSrc = require('../../Static/IMG/BT.png'); // Path to the default image
+  }
   
   function formatCurrency(amount) {
     return amount?.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
@@ -90,6 +107,12 @@ const Profile = () => {
     catch(error){
       console.error(error);
     }
+    finally{
+      setShowModal(true);
+      setTimeout(() => {
+      window.location.reload();
+      },1000);
+    }
   }
   useEffect(()=>{
     const checkSession= async()=>{
@@ -124,7 +147,7 @@ const Profile = () => {
       <form onSubmit={handledUpdate} enctype="multipart/form-data">
       <div className="profile-header row align-items-center">
         <div className="profile-header-left col-md-2 text-center">
-          <img src={avt} alt="user" className="img-fluid rounded-circle" />
+          <img src={imageSrc} alt="user" className="img-fluid rounded-circle" />
           <button class="profile-change-avt btn" onClick={handleButtonClick}><i className="fa-solid fa-arrows-rotate"></i></button>
           <input
             type="file"
