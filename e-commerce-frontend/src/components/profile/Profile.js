@@ -31,6 +31,7 @@ const Profile = () => {
   };
 
   const handleFileChange = async (event) => {
+    event.preventDefault();
     const file = event.target.files[0];
     if (file) {
       const formData = new FormData();
@@ -48,7 +49,7 @@ const Profile = () => {
           setAvt(response.data.filename);
           setModalContent({ message: 'Upload Successful!', success: true });
         } else {
-          setModalContent({ message: 'Upload Failed!', success: false });
+          setModalContent({ message: 'Upload Failed file!', success: false });
         }
         setShowModal(true);
       } catch (error) {
@@ -107,12 +108,12 @@ const Profile = () => {
     catch(error){
       console.error(error);
     }
-    finally{
-      setShowModal(true);
-      setTimeout(() => {
-      window.location.reload();
-      },1000);
-    }
+    // finally{
+    //   setShowModal(true);
+    //   setTimeout(() => {
+    //   window.location.reload();
+    //   },1000);
+    // }
   }
   useEffect(()=>{
     const checkSession= async()=>{
