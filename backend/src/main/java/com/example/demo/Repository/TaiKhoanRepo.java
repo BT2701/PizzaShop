@@ -25,4 +25,7 @@ public interface TaiKhoanRepo extends JpaRepository<TaiKhoan, Integer> {
 
     @Query("select tk from taikhoan tk where tk.username=:username")
     public TaiKhoan findByUsername(@Param("username")String username);
+
+    @Query("select tk from taikhoan tk where tk.khachhang.makh=:makh")
+    public TaiKhoan findByMakh(@Param("makh")int makh);
 }

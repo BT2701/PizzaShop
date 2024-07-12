@@ -1,5 +1,11 @@
 package com.example.demo.Controller;
 
+import com.example.demo.Model.KhachHang;
+import com.example.demo.Model.TaiKhoan;
+import com.example.demo.Repository.KhachHangRepo;
+import com.example.demo.Repository.TaiKhoanRepo;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,13 +21,20 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class FileUploadController {
+    @Autowired
+    private KhachHangRepo repo;
+    @Autowired
+    private TaiKhoanRepo taiKhoanRepo;
 
     @Value("${upload.path}")
     private String uploadPath;
 
     @PostMapping("/upload")
-    public ResponseEntity<Map<String, Object>> handleFileUpload(@RequestParam("avt") MultipartFile file) {
+    public ResponseEntity<Map<String, Object>> handleFileUpload(@RequestParam("avt") MultipartFile file,
+                                                                @RequestParam("makh")int makh,
+                                                                HttpSession session) {
         Map<String, Object> response = new HashMap<>();
         if (file.isEmpty()) {
             response.put("success", false);
@@ -44,9 +57,13 @@ public class FileUploadController {
 
             // Kiểm tra xem tệp ảnh đã tồn tại chưa
             if (Files.exists(path)) {
-                response.put("success", false);
-                response.put("message", "Tệp ảnh đã tồn tại.");
-                return ResponseEntity.badRequest().body(response);
+                response.put("success", true);
+                response.put("filename", filename);
+                repo.updateAvt(filename,makh);
+                KhachHang khachHang=repo.findById(makh).get();
+                khachHang.setTaikhoan(taiKhoanRepo.findByMakh(makh));
+                session.setAttribute("user", khachHang);
+                return ResponseEntity.ok(response);
             }
 
             // Kiểm tra kích thước ảnh
@@ -75,7 +92,11 @@ public class FileUploadController {
             response.put("success", false);
             response.put("message", "File upload failed");
         }
-        System.out.println(response);
+        repo.updateAvt(response.get("filename").toString(),makh);
+        KhachHang khachHang=repo.findById(makh).get();
+        khachHang.setTaikhoan(taiKhoanRepo.findByMakh(makh));
+        session.setAttribute("user", khachHang);
+//        System.out.println(response.get("filename"));
         return ResponseEntity.ok(response);
     }
 
