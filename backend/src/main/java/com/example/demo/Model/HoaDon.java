@@ -31,4 +31,6 @@ public class HoaDon {
     private List<ChiTietHoaDon> chiTietHoaDonList;
     @Column
     private Integer phantramgiam;
+    @Column
+    private Integer tinhtrang;
 }
