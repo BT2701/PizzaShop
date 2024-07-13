@@ -77,9 +77,10 @@
     list-style-type: none;
     font-style: italic;
 }
-.history-content-box-mid-center>a{
-    text-decoration: none;
+.history-content-box-mid-center>button{
     color: rgb(5, 153, 239);
     cursor: pointer;
+    width: fit-content;
+    padding: 0;
 }
 
