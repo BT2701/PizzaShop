@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import StudentTable from './components/content/studentTable';
 import Header from './components/header-footer/header';
 import Footer from './components/header-footer/footer';
 import Login from './components/login-resigter/login';
@@ -10,6 +9,7 @@ import ForgotPassword from './components/login-resigter/Forgot';
 import Client_Products from './components/client-products/client_products';
 import { UserProvider } from './components/login-resigter/UserContext';
 import Profile from './components/profile/Profile';
+import OrderHistory from './components/profile/OrderHistory';
 
 const App = () => {
     return (
@@ -37,6 +37,7 @@ const MainApp = () => {
                     <Route path="/homepage" element={<Client_Home />} />
                     <Route path="/products" element={<Client_Products />} />
                     <Route path='/profile' element={<Profile/>}/>
+                    <Route path='/history' element={<OrderHistory/>}/>
                 </Routes>
             </div>
             <Footer />

@@ -4,6 +4,8 @@ import '../../Static/CSS/profile.css';
 import { UserContext } from '../login-resigter/UserContext';
 import axios from 'axios';
 import LoginModal from '../login-resigter/Notification';
+import ChangePasswordModal from './ChangePass';
+import { Link } from 'react-router-dom';
 
 
 const Profile = () => {
@@ -22,7 +24,12 @@ const Profile = () => {
   const [ho, setHo]= useState("");
   const [ten, setTen]=useState("");
   const [tongchitieu, setTongchitieu]= useState(0);
-  const [username, setUsername]= useState(user?.taikhoan.username||"")
+  const [username, setUsername]= useState(user?.taikhoan.username||"");
+
+  const [showModalChange, setShowModalChange] = useState(false);
+
+  const handleOpenModalChange = () => setShowModalChange(true);
+  const handleCloseModalChange = () => setShowModalChange(false);
   let imageSrc;
   const fileInputRef = useRef(null);
 
@@ -161,7 +168,7 @@ const Profile = () => {
         <div className="profile-header-mid">
           <p className="h3">{user?.ho+" "+user?.ten}</p>
           <div className="profile-header-mid-fee">
-            <label className="mr-2">Tổng chi tiêu: </label>
+            <label className="mr-2">Total Spending: </label>
             <p className="mb-0">{formatCurrency(user?.tongchitieu)}</p>
           </div>
         </div>
@@ -169,15 +176,15 @@ const Profile = () => {
         {!isContentVisible && (<i class="fa-solid fa-chevron-down control-down" onClick={handleShowClick}></i>)}
         {isContentVisible && (<i class="fa-solid fa-chevron-up control-up" onClick={handleHideClick}></i>)}
         {isContentVisible && ( <div class="profile-header-right-control">
-            <button className="btn profile-header-right-control-btn"><i class="fa-solid fa-clock-rotate-left"></i> Lịch sử đơn hàng</button>
-            <button className="btn profile-header-right-control-btn"><i className="fa-solid fa-arrows-rotate"></i> Đổi mật khẩu</button>
+            <Link className="btn profile-header-right-control-btn profile-option-btn" to={"/history"}><i class="fa-solid fa-clock-rotate-left"></i> Order History</Link>
+            <button className="btn profile-header-right-control-btn profile-option-btn" onClick={handleOpenModalChange}><i className="fa-solid fa-arrows-rotate"></i> Change Password</button>
           </div>)}
         </div>
       </div>
       <div className="profile-content">
         <div className="profile-content-row form-group row">
           <label htmlFor="profile-username" className="col-sm-2 col-form-label">
-            <i className="fa-solid fa-user"></i> Tên đăng nhập:
+            <i className="fa-solid fa-user"></i> Username:
           </label>
           <div className="col-sm-10">
             <input type="text" id="profile-username" className="form-control" value={user?.taikhoan.username} readOnly />
@@ -193,7 +200,7 @@ const Profile = () => {
         </div>
         <div className="profile-content-row form-group row">
           <label htmlFor="profile-phone" className="col-sm-2 col-form-label">
-            <i className="fa-solid fa-phone"></i> Số điện thoại:
+            <i className="fa-solid fa-phone"></i> Phone number:
           </label>
           <div className="col-sm-10">
             <input type="number" id="profile-phone" className="form-control" value={sdt} onChange={(e)=>setSdt(e.target.value)}/>
@@ -201,19 +208,19 @@ const Profile = () => {
         </div>
         <div className="profile-content-row form-group row">
           <label htmlFor="profile-gender" className="col-sm-2 col-form-label">
-            <i className="fa-solid fa-person-half-dress"></i> Giới tính:
+            <i className="fa-solid fa-person-half-dress"></i> Gender:
           </label>
           <div className="col-sm-10">
             <select name="profile-gender" id="profile-gender" className="form-select" value={gender} onChange={(e)=>setGender(e.target.value)}>
-              <option value="male">Nam</option>
-              <option value="female">Nữ</option>
-              <option value="other">Khác</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
             </select>
           </div>
         </div>
         <div className="profile-content-row form-group row">
           <label htmlFor="profile-birth" className="col-sm-2 col-form-label">
-            <i className="fa-solid fa-cake-candles"></i> Ngày sinh:
+            <i className="fa-solid fa-cake-candles"></i> Birth:
           </label>
           <div className="col-sm-10">
             <input type="date" id="profile-birth" className="form-control" value={birth} onChange={(e)=>setBirth(e.target.value)}/>
@@ -221,7 +228,7 @@ const Profile = () => {
         </div>
         <div className="profile-content-row form-group row">
           <label htmlFor="profile-address" className="col-sm-2 col-form-label">
-            <i className="fa-solid fa-location-dot"></i> Địa chỉ:
+            <i className="fa-solid fa-location-dot"></i> Address:
           </label>
           <div className="col-sm-10">
             <input type="text" id="profile-address" className="form-control" value={address} onChange={(e)=>setAddress(e.target.value)}/>
@@ -237,6 +244,7 @@ const Profile = () => {
                 onHide={() => setShowModal(false)}
                 content={modalContent}
             />
+      <ChangePasswordModal show={showModalChange} handleClose={handleCloseModalChange} />
     </div>
   );
 };
