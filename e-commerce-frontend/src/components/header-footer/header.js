@@ -8,12 +8,16 @@ import { Link } from 'react-router-dom';
 import { UserContext } from '../login-resigter/UserContext';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Cart from '../cart/Cart';
 // import './base-style.css';
 
 const Header = () => {
   const { user, setUser } = useContext(UserContext);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
+    const [showModal, setShowModal]= useState(false);
+    const handleCloseModal= ()=>setShowModal(false);
+    const handleOpenModal=()=>setShowModal(true);
 
     useEffect(() => {
         const checkSession = async () => {
@@ -54,9 +58,9 @@ const Header = () => {
           <div className="col-lg-4 d-flex col-6 align-items-center justify-content-end header-operations">
             {/* User info */}
             <div className="d-none d-lg-flex header-operations_user-info">
-              <a href="#" className="user-info_cart circle-bg-icon">
+              <button className="user-info_cart circle-bg-icon" onClick={handleOpenModal}>
                 <i className="fa-solid fa-cart-shopping"></i>
-              </a>
+              </button>
 
               <div className="user-info_wrapper">
                 <i className="fa-solid fa-user circle-bg-icon"></i>
@@ -87,6 +91,7 @@ const Header = () => {
           </div>
         </div>
       </div>
+      <Cart show={showModal} handleClose={handleCloseModal}/>
     </header>
   );
 };
