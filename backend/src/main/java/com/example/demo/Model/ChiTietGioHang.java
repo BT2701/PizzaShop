@@ -14,4 +14,7 @@ public class ChiTietGioHang {
     private SanPham sanpham;
     @Column
     private Integer soluong;
+    @ManyToOne
+    @JoinColumn(name = "magh")
+    private GioHang giohang;
 }
