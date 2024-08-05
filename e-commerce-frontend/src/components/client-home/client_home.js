@@ -40,13 +40,13 @@ function ClientHome() {
   }, [limit]);
 
   return (
-    <div className='container'>
+    <div className='home-container'>
       <section id="slider">
         <div className="aspect-ratio-169">
-          <img src={require('../../Static/IMG/poster.png')} alt="Poster 1" />
-          <img src={require('../../Static/IMG/poster2.png')} alt="Poster 2" />
-          <img src={require('../../Static/IMG/poster3.png')} alt="Poster 3" />
-          <img src={require('../../Static/IMG/poster4.png')} alt="Poster 4" />
+          <img src={require('../../Static/IMG/poster3.gif')} alt="Poster 1" className='home-slider-img' />
+          <img src={require('../../Static/IMG/poster.png')} alt="Poster 2" className='home-slider-img' />
+          <img src={require('../../Static/IMG/poster1.png')} alt="Poster 3" className='home-slider-img' />
+          <img src={require('../../Static/IMG/pizzabanner.png')} alt="Poster 4" className='home-slider-img' />
         </div>
         <div className="dot-container">
         <div className="dot active"></div>

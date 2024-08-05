@@ -279,3 +279,24 @@ bottom: -5px;
 left: 0;
 }
   
+
+.cart-circle-total{
+    position: absolute;
+    border-radius: 50%;
+    background-color: #ee2b2b;
+    padding: 0.2em;
+    width: 22px;
+    height: 22px;
+    top: 20%;
+    /* right: 12.5%; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-left: 1.8em;
+}
+.cart-circle-total>span{
+    color: white;
+    font-size: 13px;
+    font-weight: bolder;
+}

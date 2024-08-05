@@ -60,6 +60,9 @@ const Header = () => {
             <div className="d-none d-lg-flex header-operations_user-info">
               <button className="user-info_cart circle-bg-icon" onClick={handleOpenModal}>
                 <i className="fa-solid fa-cart-shopping"></i>
+                <div className='cart-circle-total'>
+                  <span>5</span>
+                </div>
               </button>
 
               <div className="user-info_wrapper">
