@@ -45,4 +45,14 @@ public class ChiTietGioHangService {
             return null;
         }
     }
+    public int total(int kh){
+        try {
+            GioHang gh= gioHangRepo.getGioHangByKH(kh);
+            return gh.getTongtien();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return 0;
+        }
+    }
 }

@@ -19,11 +19,11 @@ public class GioHangCTL {
 
     @GetMapping("api/cart")
     public Map<String, Object> cartDetail(HttpSession session){
-//        Map<String, Object> response = new HashMap<>();
-//        KhachHang kh= (KhachHang) session.getAttribute("user");
-//        int makh= kh.getMakh();
-//        response.put("count", chiTietGioHangService.getNumOfProduct());
-//        response.put("cart-detail",null);
-        return null;
+        Map<String, Object> response = new HashMap<>();
+        KhachHang kh= (KhachHang) session.getAttribute("user");
+        int makh= kh.getMakh();
+        response.put("count", chiTietGioHangService.getNumOfProduct());
+        response.put("details",chiTietGioHangService.getAll(makh));
+        return response;
     }
 }

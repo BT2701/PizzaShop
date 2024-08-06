@@ -1,5 +1,6 @@
 package com.example.demo.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -10,6 +11,7 @@ public class ChiTietHoaDon {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @ManyToOne
+    @JsonIgnore // để tránh vòng lặp vô hạn khi lấy dữ liệu
     @JoinColumn(name = "mahd")
     private HoaDon hoadon;
     @ManyToOne

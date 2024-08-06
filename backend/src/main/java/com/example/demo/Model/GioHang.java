@@ -13,6 +13,7 @@ public class GioHang {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer magh;
     @OneToOne
+    @JsonIgnore
     @JoinColumn(name = "makh")
     private KhachHang khachhang;
     @Column

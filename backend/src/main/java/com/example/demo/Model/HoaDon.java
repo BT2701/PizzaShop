@@ -26,7 +26,6 @@ public class HoaDon {
     private Long tongtien;
     @Column
     private String ghichu;
-    @JsonIgnore // để tránh vòng lặp vô hạn khi lấy dữ liệu
     @OneToMany(mappedBy = "hoadon")
     private List<ChiTietHoaDon> chiTietHoaDonList;
     @Column
