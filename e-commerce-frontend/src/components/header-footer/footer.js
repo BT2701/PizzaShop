@@ -43,10 +43,10 @@ const Footer = () => {
             <h5 className="footer_contact-title">Contact Us</h5>
             <ul className="list-unstyled mb-0 footer_contact-list">
               <li className="footer_contact-list-item">
-                <i className="fa-solid fa-phone"></i> 0379614995
+                <i className="fa-solid fa-phone"></i> 0386094783
               </li>
               <li className="footer_contact-list-item">
-                <i className="fa-regular fa-envelope"></i> Luxeloom@gmail.com
+                <i className="fa-regular fa-envelope"></i> btshop@gmail.com
               </li>
             </ul>
           </div>

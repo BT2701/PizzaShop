@@ -1,12 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import '../../Static/CSS/cart.css'; // Đảm bảo rằng bạn có tệp CSS này trong thư mục src
 import { Modal } from 'react-bootstrap';
 
-function Cart ({show,handleClose}) {
+function Cart ({show,handleClose,details}) {
+    function formatCurrency(amount) {
+        return amount.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+      }
+      function sum(){
+        let temp=0;
+        for (let i=0;i<details.length;i++){
+            temp=temp+details[i].sanpham.dongia;
+        }
+        return temp;
+      }
     return (
-        <Modal show={show} onHide={handleClose}>
+        <Modal show={show} onHide={handleClose} size='lg'>
             <Modal.Header closeButton>
                 <Modal.Title>
                     Giỏ hàng
@@ -24,30 +34,36 @@ function Cart ({show,handleClose}) {
                         </tr>
                     </thead>
                     <tbody>
+                    {details.length === 0 ? (
+                        <p>Empty</p>
+                    ) : (
+                    details.map((detail) => (
                         <tr>
                             <td>
                                 <div className="cart-content-name d-flex align-items-center">
-                                    <img src="../pizzashop.png" alt="" className="img-thumbnail mr-2" style={{ width: '100px', height: 'auto' }} />
-                                    <h5 className="mb-0">Pizza VIP</h5>
+                                    <img src={require("../../Static/IMG/SanPham/"+detail?.sanpham.hinhanh)} alt="" className="img-thumbnail mr-2" style={{ width: '100px', height: 'auto' }} />
+                                    <h5 className="mb-0">{detail?.sanpham.tensp}</h5>
                                 </div>
                             </td>
                             <td>
-                                <span className="font-weight-bold">25,000đ</span>
+                                <span className="font-weight-bold">{formatCurrency(detail?.sanpham.dongia)}</span>
                             </td>
                             <td>
                                 <div className="cart-content-handle d-flex align-items-center">
-                                    <input type="number" className="form-control mr-2" style={{ width: '100px' }} />
+                                    <input type="number" className="form-control mr-2" style={{ width: '100px' }} value={detail?.soluong} />
                                     <button className="btn btn-danger"><i className="fas fa-trash"></i></button>
                                 </div>
                             </td>
                         </tr>
+                        ))
+                    ) }
                     </tbody>
                 </table>
 
             </div>
             <div className='cart-total'>
                 <label>Tổng cộng: </label>
-                <span>32,000đ</span>
+                <span>{formatCurrency(sum())}</span>
             </div>
         </div>
         </Modal.Body>

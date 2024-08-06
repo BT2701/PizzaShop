@@ -18,11 +18,12 @@ const Header = () => {
     const [showModal, setShowModal]= useState(false);
     const handleCloseModal= ()=>setShowModal(false);
     const handleOpenModal=()=>setShowModal(true);
-
+    const [details, setDetails]= useState([]);
+    const [numOfCart, setNumOfCart]= useState(0);
     useEffect(() => {
         const checkSession = async () => {
             try {
-                const response = await axios.get('http://localhost:8081/api/session', { withCredentials: true });
+                const response = await axios.get('http://localhost:8081/api/session', { withCredentials: true });                
                 if (response.data.authenticated) {
                     setUser(response.data.user);
                 } else {
@@ -34,8 +35,23 @@ const Header = () => {
                 setLoading(false);
             }
         };
+        const checkCart= async()=>{
+          try {
+            const cartData= await axios.get('http://localhost:8081/api/cart',{withCredentials: true});
+                if(cartData.data){
+                  setNumOfCart(cartData.data.count);
+                  setDetails(cartData.data.details);
+                }
+                else{
+                  console.error("undefine data");
+                }
+          } catch (error) {
+            console.error('undefine detail list for cart', error);
+          }
+        }
 
         checkSession();
+        checkCart();
     }, [setUser, navigate]);
   
   return (
@@ -61,7 +77,7 @@ const Header = () => {
               <button className="user-info_cart circle-bg-icon" onClick={handleOpenModal}>
                 <i className="fa-solid fa-cart-shopping"></i>
                 <div className='cart-circle-total'>
-                  <span>5</span>
+                  <span>{numOfCart}</span>
                 </div>
               </button>
 
@@ -94,7 +110,7 @@ const Header = () => {
           </div>
         </div>
       </div>
-      <Cart show={showModal} handleClose={handleCloseModal}/>
+      <Cart show={showModal} handleClose={handleCloseModal} details={details}/>
     </header>
   );
 };
