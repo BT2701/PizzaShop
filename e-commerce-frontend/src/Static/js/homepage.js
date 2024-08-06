@@ -33,13 +33,16 @@ export const initializeSlider = () => {
     });
 
     // Hàm để chuyển hình ảnh
-    function imgSlide() {
+    function delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+    async function imgSlide() {
         index++;
         if (index >= imgNumber) {
             index = 0;
         }
         slider(index);
-        console.log(index);
+        await delay(100);
     }
 
     // Hàm để cập nhật slider và dot

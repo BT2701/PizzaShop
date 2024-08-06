@@ -9,9 +9,13 @@ import axios from 'axios';
 
 const OrderHistory = () => {
   const [showModal, setShowModal] = useState(false);
-  const handleOpenModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
   const [histories, setHistories] = useState([]);
+  const [detailList, setDetailList] = useState([]);
+  function handleOpenModal(details){
+    setDetailList(details);
+    setShowModal(true);
+  }
   function tinhTrang(temp){
     if(temp===1){
       return "Đã đặt hàng";
@@ -73,7 +77,7 @@ const OrderHistory = () => {
     }
     checkData();
     changeColor();
-  },[histories]);
+  },[]); //thêm history để quay video
   return (
     <div className='container-history-main'>
       <div className="history-container">
@@ -104,8 +108,8 @@ const OrderHistory = () => {
                 ):(
                   <span> và {countOthers(history?.chiTietHoaDonList)} khác</span>)}</h5>
                 <li>Thời gian: <span>{formatDate(history?.ngaylap)}</span></li>
-                <button className='btn' onClick={handleOpenModal}>View details</button>
-              </div>
+                <button className='btn' onClick={() =>handleOpenModal(history?.chiTietHoaDonList)}>Xem chi tiết</button>
+              </div>  
               <div className="history-content-box-mid-right">
                 <span className="text-danger">{formatCurrency(history?.tongtien)}</span>
               </div>
@@ -115,7 +119,7 @@ const OrderHistory = () => {
           )}
         </div>
       </div>
-      <OrderDetail mahd={1} show={showModal} handleClose={handleCloseModal}/>
+      <OrderDetail mahd={1} show={showModal} handleClose={handleCloseModal} details={detailList}/>
       </div>
   );
 };
