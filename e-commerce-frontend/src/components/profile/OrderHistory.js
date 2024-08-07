@@ -102,10 +102,10 @@ const OrderHistory = () => {
             </div>
             <div className="history-content-box-mid">
               <div className="history-content-box-mid-left">
-                <img src={require('../../Static/IMG/SanPham/'+history?.chiTietHoaDonList[0].sanpham.hinhanh)} alt="Pizza Shop" />
+                <img src={require('../../Static/IMG/SanPham/'+history?.chiTietHoaDonList[0]?.sanpham?.hinhanh)} alt="Pizza Shop" />
               </div>
               <div className="history-content-box-mid-center">
-                <h5>{history?.chiTietHoaDonList[0].sanpham.tensp} {countOthers(history?.chiTietHoaDonList)===0?(
+                <h5>{history?.chiTietHoaDonList[0]?.sanpham?.tensp} {countOthers(history?.chiTietHoaDonList)===0?(
                   <span></span>
                 ):(
                   <span> và {countOthers(history?.chiTietHoaDonList)} khác</span>)}</h5>

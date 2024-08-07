@@ -6,6 +6,7 @@ import '../../Static/CSS/index.css';
 import '../../Static/CSS/category.css';
 import Pagination from '../custom/pagination';
 import ProductDetail from './productDetail';
+import { useCart } from '../cart/CartContext';
 
 const Client_Products = () => {
   const [products, setProducts] = useState([]);
@@ -18,6 +19,8 @@ const Client_Products = () => {
   const[productId, setProductID]=useState(1);
   const[showModal, setShowModal]=useState(false);
   const[salerProduct, setSalerProduct]= useState(0);
+  const { cartCount } = useCart();
+
   // phân trang (1 trang có 15 sản phẩm)
   const totalPages = Math.ceil(numOfProduct / 15);
   const handlePageChange = (page) => {
@@ -62,7 +65,7 @@ const Client_Products = () => {
     };
 
     fetchData();
-  }, [currentPage, productName, productType, priceRange]);
+  }, [currentPage, productName, productType, priceRange,cartCount]);
 
   const handleCategoryChange = (event) => {
     setProductType(event.target.value);

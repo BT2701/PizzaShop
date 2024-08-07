@@ -13,4 +13,6 @@ import java.util.List;
 public interface HoaDonRepo extends JpaRepository<HoaDon, Integer> {
     @Query("select hd from hoadon hd where hd.khachhang.makh=:makh")
     public List<HoaDon> findByKH(@Param("makh") int makh);
+
+    HoaDon findTopByOrderByMahdDesc();
 }

@@ -76,4 +76,7 @@ public class SanPhamService {
     public SanPham getById(Integer id) {
         return repo.findById(id).orElse(null);
     }
+    public void update(SanPham sanPham) {
+        repo.save(sanPham);
+    }
 }

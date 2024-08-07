@@ -40,15 +40,21 @@ const ProductDetail = ({ productId, showModal, saler }) => {
 
   const addProductToCart = async() => {
     const soluong= quantityInputRef.current.value;
-    try {
-      const response= await axios.get('http://localhost:8081/api/addToCart?productId='+detailProduct.masp+'&quantity='+soluong,{withCredentials:true});
-      if(response.data){
-        setShowModal(false);
-        addToCart();
-      }
-    } catch (error) {
-      console.error(error);
+    if(soluong > detailProduct.soluong){
+      alert("Sản phẩm không đủ!");
     }
+    else{
+      try {
+        const response= await axios.get('http://localhost:8081/api/addToCart?productId='+detailProduct.masp+'&quantity='+soluong,{withCredentials:true});
+        if(response.data){
+          setShowModal(false);
+          addToCart();
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    
     // Add to cart logic
   };
 

@@ -481,7 +481,7 @@ a {
     text-align: center;
     justify-content: center;
     overflow: hidden;
-    margin-left: 5px;
+    margin-left: 10px !important;
 
 }
 .image-product-vip{

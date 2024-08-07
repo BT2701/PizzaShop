@@ -29,9 +29,23 @@ export const CartProvider = ({ children }) => {
       console.error('Failed to add to cart:', error);
     }
   };
+  const removeFromCart = async()=>{
+    try {
+      setCartCount(cartCount-1);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const pay = async()=>{
+    try {
+      setCartCount(0);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
-    <CartContext.Provider value={{ cartCount, addToCart }}>
+    <CartContext.Provider value={{ cartCount, addToCart, removeFromCart, pay }}>
       {children}
     </CartContext.Provider>
   );

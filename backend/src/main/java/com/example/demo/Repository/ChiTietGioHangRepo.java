@@ -2,7 +2,9 @@ package com.example.demo.Repository;
 
 import com.example.demo.Model.ChiTietGioHang;
 import com.example.demo.Model.ChiTietHoaDon;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -16,4 +18,9 @@ public interface ChiTietGioHangRepo extends JpaRepository<ChiTietGioHang, Intege
 
     @Query("select ct from ctgiohang ct where ct.sanpham.masp=:masp")
     public ChiTietGioHang findBySP(@Param("masp") int sp);
+
+    @Modifying
+    @Transactional
+    @Query("delete from ctgiohang ct where ct.giohang.magh=:magh")
+    public void deleteByGiohang(@Param("magh") int magh);
 }

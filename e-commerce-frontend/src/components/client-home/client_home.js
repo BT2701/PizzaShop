@@ -9,6 +9,7 @@ import { initializeSlider } from '../../Static/js/homepage';
 import axios from 'axios';
 import { data } from 'autoprefixer';
 import ProductDetail from '../client-products/productDetail';
+import { useCart } from '../cart/CartContext';
 
 
 function ClientHome() {
@@ -18,6 +19,8 @@ function ClientHome() {
   const[productId, setProductID]=useState(1);
   const[showModal, setShowModal]=useState(false);
   const[salerProduct, setSalerProduct]= useState(0);
+  const { cartCount } = useCart();
+
   function showDetailModal(id, saler){
     setProductID(id);
     setSalerProduct(saler);
@@ -47,7 +50,7 @@ function ClientHome() {
 
     fetchData();
     initializeSlider();
-  }, [limit]);
+  }, [limit, cartCount]);
 
   return (
     <div className='home-container'>

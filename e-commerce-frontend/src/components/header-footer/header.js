@@ -80,7 +80,7 @@ const Header = () => {
               <button className="user-info_cart circle-bg-icon" onClick={handleOpenModal}>
                 <i className="fa-solid fa-cart-shopping"></i>
                 <div className='cart-circle-total'>
-                  <span>{cartCount}</span>
+                  <span>{numOfCart}</span>
                 </div>
               </button>
 

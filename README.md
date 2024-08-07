@@ -2,18 +2,23 @@
 
 ## Table of Contents
 
-- [Project Overview](#project-overview)
-- [Features](#features)
-- [Technologies Used](#technologies-used)
-- [Architecture](#architecture)
-- [Setup and Installation](#setup-and-installation)
-  - [Backend Setup (Spring Boot)](#backend-setup-spring-boot)
-  - [Frontend Setup (ReactJS)](#frontend-setup-reactjs)
-  - [Database Setup (MySQL)](#database-setup-mysql)
-- [Running the Application](#running-the-application)
-- [API Endpoints](#api-endpoints)
-- [Contributing](#contributing)
-- [License](#license)
+- [Spring Boot (Backend) and ReactJS (Frontend) Project](#spring-boot-backend-and-reactjs-frontend-project)
+  - [Table of Contents](#table-of-contents)
+  - [Project Overview](#project-overview)
+  - [Features](#features)
+      - [Customer](#customer)
+      - [Staff](#staff)
+      - [Admin](#admin)
+  - [Technologies Used](#technologies-used)
+  - [Architecture](#architecture)
+  - [Setup and Installation](#setup-and-installation)
+    - [Backend Setup (Spring Boot)](#backend-setup-spring-boot)
+    - [Frontend Setup (ReactJS)](#frontend-setup-reactjs)
+    - [Database Setup (MySQL)](#database-setup-mysql)
+  - [Running the Application](#running-the-application)
+  - [API Endpoints](#api-endpoints)
+  - [Contributing](#contributing)
+  - [License](#license)
 
 ## Project Overview
 
@@ -21,14 +26,53 @@ This project is a web application built using Spring Boot for the backend and Re
 
 ## Features
 
-- User authentication and authorization
-- CRUD operations on entities
-- Responsive UI
-- RESTful API communication between frontend and backend
+#### Customer
+<table>
+    <thead>
+        <th>
+            Login
+        </th>
+        <th>
+            Homepage
+        </th>
+        <th>
+            Product
+        </th>
+        <th>
+            Profile
+        </th>
+        <th>
+            Cart
+        </th>
+        <th>
+            History
+        </th>
+        <th>
+            Contact
+        </th>
+    </thead>
+    <tbody>
+        <tr>
+            <td><img src="img_readme/Login.gif" alt="Login"></td>
+            <td><img src="img_readme/Homepage.gif" alt="Homepage"></td>
+            <td><img src="img_readme/product.gif" alt="product"></td>
+            <td><img src="img_readme/profile.gif" alt="profile"></td>
+            <td><img src="img_readme/cart.gif" alt="cart"></td>
+            <td><img src="img_readme/history.gif" alt="history"></td>
+            <td><img src="img_readme/contact.gif" alt="contact"></td>
+        </tr>
+    </tbody>
+
+</table>
+
+#### Staff
+`Currently in release`
+#### Admin
+`Currently in release`
 
 ## Technologies Used
 
-- **Backend:** Spring Boot, Spring Security, JPA, Hibernate
+- **Backend:** Spring Boot, Spring Security, Spring JPA, Restful.
 - **Frontend:** ReactJS, Axios, Bootstrap
 - **Database:** MySQL
 - **Build Tools:** Maven (backend), npm (frontend)
@@ -46,16 +90,16 @@ The application follows a client-server architecture:
 
 1. **Clone the repository:**
     ```sh
-    git clone https://github.com/yourusername/your-repo.git
-    cd your-repo/backend
+    git clone https://github.com/BT2701/E-commerce-Reactjs-SpringBoot.git
+    cd E-commerce-Reactjs-SpringBoot/backend
     ```
 
 2. **Configure MySQL Database:**
     Update the `application.properties` file located in `src/main/resources` with your MySQL database credentials:
     ```properties
-    spring.datasource.url=jdbc:mysql://localhost:3306/yourdatabase
-    spring.datasource.username=yourusername
-    spring.datasource.password=yourpassword
+    spring.datasource.url=jdbc:mysql://localhost:3306/ecommerce
+    spring.datasource.username=
+    spring.datasource.password=
     spring.jpa.hibernate.ddl-auto=update
     ```
 
@@ -84,7 +128,7 @@ The application follows a client-server architecture:
 3. **Configure API Base URL:**
     Update the API base URL in the `src/config.js` file to match your backend server URL:
     ```javascript
-    export const API_BASE_URL = 'http://localhost:8080/api';
+    export const API_BASE_URL = 'http://localhost:8080/';
     ```
 
 4. **Run the application:**

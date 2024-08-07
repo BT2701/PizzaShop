@@ -1,10 +1,46 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import '../../Static/CSS/cart.css'; // Đảm bảo rằng bạn có tệp CSS này trong thư mục src
 import { Modal } from 'react-bootstrap';
+import axios from 'axios';
+import { useCart } from './CartContext';
 
 function Cart ({show,handleClose,details}) {
+    const { removeFromCart } = useCart();
+    const {pay} =useCart();
+
+    useEffect(() => {
+        const btn = document.getElementById("cart-payment");
+        if (btn) {
+            if (details.length === 0) {
+                btn.classList.add('disabled');
+            } else {
+                btn.classList.remove('disabled');
+            }
+        }
+    }, [details]);
+    const payment= async(total)=>{
+        try {
+            const detailsString = encodeURIComponent(JSON.stringify(details));
+            const response = await axios.get('http://localhost:8081/api/paying?details='+detailsString+'&total='+total,{withCredentials:true});
+            if(response.data){
+                pay();
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    const deleteDetail= async(detailId)=>{
+        try {
+            const response= await axios.get('http://localhost:8081/api/deleteFromCart?detailId='+detailId,{withCredentials:true});
+            if(response.data){
+                removeFromCart();
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    };
     function formatCurrency(amount) {
         return amount.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
       }
@@ -51,7 +87,7 @@ function Cart ({show,handleClose,details}) {
                             <td>
                                 <div className="cart-content-handle d-flex align-items-center">
                                     <input type="number" className="form-control mr-2" style={{ width: '100px' }} value={detail?.soluong} />
-                                    <button className="btn btn-danger"><i className="fas fa-trash"></i></button>
+                                    <button className="btn btn-danger" onClick={()=>deleteDetail(detail?.id)}><i className="fas fa-trash"></i></button>
                                 </div>
                             </td>
                         </tr>
@@ -70,7 +106,12 @@ function Cart ({show,handleClose,details}) {
         <Modal.Footer>
             <div className='cart-footer'>
                 <button className='btn btn-secondary' onClick={handleClose}>Đóng</button>
-                <button className='btn btn-primary'>Thanh toán</button>
+                {sum()===0?(
+                    <button className='btn btn-primary disabled' id='cart-payment' onClick={()=>payment(sum())}>Thanh toán</button>
+
+                ):(
+                    <button className='btn btn-primary' id='cart-payment' onClick={()=>payment(sum())}>Thanh toán</button>
+                )}
             </div>
         </Modal.Footer>
         </Modal>
