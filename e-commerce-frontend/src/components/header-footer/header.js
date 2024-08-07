@@ -9,6 +9,7 @@ import { UserContext } from '../login-resigter/UserContext';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Cart from '../cart/Cart';
+import { useCart } from '../cart/CartContext';
 // import './base-style.css';
 
 const Header = () => {
@@ -20,6 +21,8 @@ const Header = () => {
     const handleOpenModal=()=>setShowModal(true);
     const [details, setDetails]= useState([]);
     const [numOfCart, setNumOfCart]= useState(0);
+    const { cartCount } = useCart();
+
     useEffect(() => {
         const checkSession = async () => {
             try {
@@ -52,7 +55,7 @@ const Header = () => {
 
         checkSession();
         checkCart();
-    }, [setUser, navigate]);
+    }, [setUser, navigate, cartCount]);
   
   return (
     <header className="header-style">
@@ -77,7 +80,7 @@ const Header = () => {
               <button className="user-info_cart circle-bg-icon" onClick={handleOpenModal}>
                 <i className="fa-solid fa-cart-shopping"></i>
                 <div className='cart-circle-total'>
-                  <span>{numOfCart}</span>
+                  <span>{cartCount}</span>
                 </div>
               </button>
 

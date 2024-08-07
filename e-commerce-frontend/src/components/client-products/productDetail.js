@@ -1,14 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import '../../Static/CSS/product-detailStyle.css';
 import axios from 'axios';
 import { Modal, Button } from 'react-bootstrap';
+import { useCart } from '../cart/CartContext';
 
 const ProductDetail = ({ productId, showModal, saler }) => {
   const [detailProduct, setDetailProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [modal, setShowModal] = useState(false);
+  const quantityInputRef = useRef(null);
+  const { addToCart } = useCart();
 
   function formatCurrency(amount) {
     return amount.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
@@ -35,7 +38,17 @@ const ProductDetail = ({ productId, showModal, saler }) => {
     setQuantity((prevQuantity) => Math.min(detailProduct.soluong, prevQuantity + 1));
   };
 
-  const addProductToCart = () => {
+  const addProductToCart = async() => {
+    const soluong= quantityInputRef.current.value;
+    try {
+      const response= await axios.get('http://localhost:8081/api/addToCart?productId='+detailProduct.masp+'&quantity='+soluong,{withCredentials:true});
+      if(response.data){
+        setShowModal(false);
+        addToCart();
+      }
+    } catch (error) {
+      console.error(error);
+    }
     // Add to cart logic
   };
 
@@ -98,6 +111,7 @@ const ProductDetail = ({ productId, showModal, saler }) => {
                         value={quantity}
                         min="1"
                         max={detailProduct.soluong}
+                        ref={quantityInputRef}
                         onChange={(e) => setQuantity(e.target.value)}
                       />
                       <button className="quantity-btn" id="quantity-btn-increase" onClick={increaseQuantity}>+</button>

@@ -11,7 +11,7 @@ function Cart ({show,handleClose,details}) {
       function sum(){
         let temp=0;
         for (let i=0;i<details.length;i++){
-            temp=temp+details[i].sanpham.dongia;
+            temp=temp+(details[i].sanpham.dongia * details[i].soluong);
         }
         return temp;
       }

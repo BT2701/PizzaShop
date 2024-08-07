@@ -11,10 +11,12 @@ import { UserProvider } from './components/login-resigter/UserContext';
 import Profile from './components/profile/Profile';
 import OrderHistory from './components/profile/OrderHistory';
 import Contact from './components/Contact/Contact';
+import { CartProvider } from './components/cart/CartContext';
 
 const App = () => {
     return (
         <UserProvider>
+        <CartProvider>
         <Router>
             <Routes>
                 {/* <Route path="/" element={<Navigate to="/login" />} /> */}
@@ -24,6 +26,7 @@ const App = () => {
                 <Route path="/*" element={<MainApp />} />
             </Routes>
         </Router>
+        </CartProvider>
         </UserProvider>
     );
 };
