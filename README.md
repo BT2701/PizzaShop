@@ -27,42 +27,23 @@ This project is a web application built using Spring Boot for the backend and Re
 ## Features
 
 #### Customer
-<table>
-    <thead>
-        <th>
-            Login
-        </th>
-        <th>
-            Homepage
-        </th>
-        <th>
-            Product
-        </th>
-        <th>
-            Profile
-        </th>
-        <th>
-            Cart
-        </th>
-        <th>
-            History
-        </th>
-        <th>
-            Contact
-        </th>
-    </thead>
-    <tbody>
+<table width:100>
         <tr>
             <td><img src="img_readme/Login.gif" alt="Login"></td>
             <td><img src="img_readme/Homepage.gif" alt="Homepage"></td>
+        </tr>
+        <tr>
             <td><img src="img_readme/product.gif" alt="product"></td>
             <td><img src="img_readme/profile.gif" alt="profile"></td>
+        </tr>
+        <tr>
             <td><img src="img_readme/cart.gif" alt="cart"></td>
             <td><img src="img_readme/history.gif" alt="history"></td>
-            <td><img src="img_readme/contact.gif" alt="contact"></td>
         </tr>
-    </tbody>
-
+        <tr>
+            <td><img src="img_readme/contact.gif" alt="contact"></td>
+            <td></td>
+        </tr>
 </table>
 
 #### Staff
