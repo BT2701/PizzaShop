@@ -10,6 +10,7 @@ import Client_Products from './components/client-products/client_products';
 import { UserProvider } from './components/login-resigter/UserContext';
 import Profile from './components/profile/Profile';
 import OrderHistory from './components/profile/OrderHistory';
+import Contact from './components/Contact/Contact';
 
 const App = () => {
     return (
@@ -38,6 +39,7 @@ const MainApp = () => {
                     <Route path="/products" element={<Client_Products />} />
                     <Route path='/profile' element={<Profile/>}/>
                     <Route path='/history' element={<OrderHistory/>}/>
+                    <Route path='/contact' element={<Contact/>}/>
                 </Routes>
             </div>
             <Footer />

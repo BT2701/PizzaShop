@@ -300,3 +300,24 @@ left: 0;
     font-size: 13px;
     font-weight: bolder;
 }
+.mr-2{
+    margin-right: 0.3em;
+}
+.header-icon-shop{
+    font-size: 50px;
+}
+
+.nav-item {
+    list-style: none;
+}   
+
+.nav-item .nav-link {
+    text-decoration: none;
+}
+
+.nav-item.active .nav-link {
+    text-decoration: underline; /* Gạch dưới */
+    font-weight: bold; /* Tùy chọn: làm chữ đậm */
+    color: #f75515;
+}
+  

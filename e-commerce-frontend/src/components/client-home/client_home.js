@@ -8,11 +8,21 @@ import 'normalize.css';
 import { initializeSlider } from '../../Static/js/homepage';
 import axios from 'axios';
 import { data } from 'autoprefixer';
+import ProductDetail from '../client-products/productDetail';
+
 
 function ClientHome() {
   const [sanphamListnoibac, setSanphamListnoibac] = useState([]);
   const [selectedValue, setSelectedValue] = useState('Fillters');
   const [limit, setLimit]= useState(5);
+  const[productId, setProductID]=useState(1);
+  const[showModal, setShowModal]=useState(false);
+  const[salerProduct, setSalerProduct]= useState(0);
+  function showDetailModal(id, saler){
+    setProductID(id);
+    setSalerProduct(saler);
+    setShowModal(true);
+  }
   const handleInputChange=(event)=>{
     event.preventDefault();
     const value=parseInt(event.target.value);
@@ -81,7 +91,7 @@ function ClientHome() {
                 sanphamListnoibac.map((sanpham) => (
                   <div
                     key={sanpham[0].masp}
-                    className="product-gallery-content-product-item"
+                    className="product-gallery-content-product-item" onClick={()=>showDetailModal(sanpham[0].masp, sanpham[1])}
                   >
                     <div className="split-img">
                       <img src={require('../../Static/IMG/SanPham/'+sanpham[0].hinhanh)} alt={sanpham[0].tensp} className="image-product-vip" />
@@ -105,6 +115,10 @@ function ClientHome() {
           </div>
         </div>
       </section>
+      <ProductDetail
+        productId={productId}
+        showModal={showModal}
+        saler={salerProduct}/>
     </div>
   );
 }

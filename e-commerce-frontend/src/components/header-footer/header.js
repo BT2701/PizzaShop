@@ -60,7 +60,7 @@ const Header = () => {
         <div className="row d-flex align-items-center container-fluid">
           {/* Logo */}
           <div className="col-lg-4 col-6 web-logo">
-            <a href="#">Pizza Shop</a>
+            <Link to={'/homepage'}><i class="fa-solid fa-pizza-slice mr-2 header-icon-shop"></i>BT SHOP</Link>
           </div>
 
           {/* Search Bar */}
@@ -116,6 +116,11 @@ const Header = () => {
 };
 
 const Navbar = () => {
+  const [activeIndex, setActiveIndex] = useState(null);
+
+  const handleClick = (index) => {
+    setActiveIndex(index);
+  };
   
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -133,23 +138,21 @@ const Navbar = () => {
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 navbar-list">
-            <li className="nav-item">
-              <a className="nav-link" href="/homepage" >
-                Home
-              </a>
+            <li className={`nav-item ${activeIndex === 0 ? 'active' : ''}`} onClick={() => handleClick(0)}>
+              <Link className="nav-link" to={'/homepage'} >
+                <i class="fa-solid fa-house mr-2"></i>
+                Trang chủ
+              </Link>
             </li>
-            <li className="nav-item">
-              <Link to={'/products'} className="nav-link">Products</Link>
+            <li className={`nav-item ${activeIndex === 1 ? 'active' : ''}`} onClick={() => handleClick(1)}>
+              <Link to={'/products'} className="nav-link">
+              <i class="fa-solid fa-pizza-slice mr-2"></i>Sản phẩm</Link>
             </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-              Bestseller
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-              Contacts
-              </a>
+            <li className={`nav-item ${activeIndex === 2 ? 'active' : ''}`} onClick={() => handleClick(2)}>
+              <Link className="nav-link" to={'/contact'}>
+              <i class="fa-solid fa-phone mr-2"></i>
+              Liên hệ
+              </Link>
             </li>
             {/* Case user has been login */}
             <li className="nav-item d-lg-none d-flex align-items-center">
