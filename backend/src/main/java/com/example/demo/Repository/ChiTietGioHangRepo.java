@@ -13,4 +13,7 @@ import java.util.List;
 public interface ChiTietGioHangRepo extends JpaRepository<ChiTietGioHang, Integer> {
     @Query("select ct from ctgiohang ct where ct.giohang.magh=:magh")
     public List<ChiTietGioHang> getList(@Param("magh") int cart);
+
+    @Query("select ct from ctgiohang ct where ct.sanpham.masp=:masp")
+    public ChiTietGioHang findBySP(@Param("masp") int sp);
 }

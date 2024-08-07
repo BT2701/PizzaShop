@@ -2,8 +2,10 @@ package com.example.demo.Service;
 
 import com.example.demo.Model.ChiTietGioHang;
 import com.example.demo.Model.GioHang;
+import com.example.demo.Model.SanPham;
 import com.example.demo.Repository.ChiTietGioHangRepo;
 import com.example.demo.Repository.GioHangRepo;
+import com.example.demo.Repository.KhachHangRepo;
 import com.example.demo.Repository.SanPhamRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,12 +20,38 @@ public class ChiTietGioHangService {
     private SanPhamRepo sanPhamRepo;
     @Autowired
     private GioHangRepo gioHangRepo;
+    @Autowired
+    private KhachHangRepo khachHangRepo;
+    @Autowired
+    private ChiTietGioHangRepo chiTietGioHangRepo;
 
-    public void addDetail(int productId, int total){
-        ChiTietGioHang ct = new ChiTietGioHang();
-        ct.setSanpham(sanPhamRepo.findById(productId).orElse(null));
-        ct.setSoluong(total);
-        ctRepo.save(ct);
+    public boolean addDetail(int productId, int total, int makh){
+        try {
+            GioHang gioHang = gioHangRepo.getGioHangByKH(makh);
+            if(gioHang==null){
+                gioHang = new GioHang();
+                gioHang.setKhachhang(khachHangRepo.findById(makh).orElse(null));
+                gioHang.setTongtien(0);
+                gioHangRepo.save(gioHang);
+            }
+            ChiTietGioHang ct = chiTietGioHangRepo.findBySP(productId);
+            if(ct==null){
+                ct = new ChiTietGioHang();
+                SanPham sanPham=sanPhamRepo.findById(productId).orElse(null);
+                ct.setSanpham(sanPham);
+                ct.setSoluong(total);
+                ct.setGiohang(gioHang);
+            }
+            else {
+                ct.setSoluong(ct.getSoluong()+total);
+            }
+            ctRepo.save(ct);
+            return true;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
     }
     public Long getNumOfProduct(){
         return ctRepo.count();
