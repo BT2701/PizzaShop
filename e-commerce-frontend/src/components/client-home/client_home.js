@@ -40,7 +40,7 @@ function ClientHome() {
     const fetchData = async () => {
       try {
 
-        const sanphamNoiBacResponse = await axios.get('http://localhost:8081/api/sanphamnoibac?limit='+limit);
+        const sanphamNoiBacResponse = await axios.get('http://localhost:8080/api/sanphamnoibac?limit='+limit);
         setSanphamListnoibac(sanphamNoiBacResponse.data);
 
       } catch (error) {

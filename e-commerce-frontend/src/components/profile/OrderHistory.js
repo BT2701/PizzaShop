@@ -69,7 +69,7 @@ const OrderHistory = () => {
   useEffect(()=>{
     const checkData= async()=>{
       try {
-        const response= await axios.get('http://localhost:8081/api/history',{withCredentials:true});
+        const response= await axios.get('http://localhost:8080/api/history',{withCredentials:true});
         if(response.data){
           setHistories(response.data.hoaDons);
         }

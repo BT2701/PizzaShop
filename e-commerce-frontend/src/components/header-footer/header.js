@@ -26,7 +26,7 @@ const Header = () => {
     useEffect(() => {
         const checkSession = async () => {
             try {
-                const response = await axios.get('http://localhost:8081/api/session', { withCredentials: true });                
+                const response = await axios.get('http://localhost:8080/api/session', { withCredentials: true });                
                 if (response.data.authenticated) {
                     setUser(response.data.user);
                 } else {
@@ -40,7 +40,7 @@ const Header = () => {
         };
         const checkCart= async()=>{
           try {
-            const cartData= await axios.get('http://localhost:8081/api/cart',{withCredentials: true});
+            const cartData= await axios.get('http://localhost:8080/api/cart',{withCredentials: true});
                 if(cartData.data){
                   setNumOfCart(cartData.data.count);
                   setDetails(cartData.data.details);

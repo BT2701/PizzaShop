@@ -14,8 +14,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-//@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
-@CrossOrigin(origins = "https://bt2701.github.io/PizzaShop/", allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+//@CrossOrigin(origins = "https://bt2701.github.io/PizzaShop/", allowCredentials = "true")
 
 public class KhachHangCTL {
     @Autowired

@@ -38,7 +38,7 @@ const Client_Products = () => {
     const fetchData = async () => {
       try {
 
-        const categoriesResponse = await axios.get('http://localhost:8081/api/loai');
+        const categoriesResponse = await axios.get('http://localhost:8080/api/loai');
         setCategories(categoriesResponse.data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -51,13 +51,13 @@ const Client_Products = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const productsResponse = await axios.get('http://localhost:8081/api/productList?currentPage='+currentPage+'&productName='+productName+'&productType='+productType+'&priceRange='+priceRange); // Thay bằng API thực tế của bạn
+        const productsResponse = await axios.get('http://localhost:8080/api/productList?currentPage='+currentPage+'&productName='+productName+'&productType='+productType+'&priceRange='+priceRange); // Thay bằng API thực tế của bạn
          // Thay bằng API thực tế của bạn
         
         setProducts(productsResponse.data);
 
         
-        const numOfProductData= await axios.get('http://localhost:8081/api/numOfProduct');
+        const numOfProductData= await axios.get('http://localhost:8080/api/numOfProduct');
         setNumOfProduct(numOfProductData.data);
       } catch (error) {
         console.error('Error fetching data:', error);

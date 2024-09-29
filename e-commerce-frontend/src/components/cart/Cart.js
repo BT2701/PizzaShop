@@ -23,7 +23,7 @@ function Cart ({show,handleClose,details}) {
     const payment= async(total)=>{
         try {
             const detailsString = encodeURIComponent(JSON.stringify(details));
-            const response = await axios.get('http://localhost:8081/api/paying?details='+detailsString+'&total='+total,{withCredentials:true});
+            const response = await axios.get('http://localhost:8080/api/paying?details='+detailsString+'&total='+total,{withCredentials:true});
             if(response.data){
                 pay();
             }
@@ -33,7 +33,7 @@ function Cart ({show,handleClose,details}) {
     };
     const deleteDetail= async(detailId)=>{
         try {
-            const response= await axios.get('http://localhost:8081/api/deleteFromCart?detailId='+detailId,{withCredentials:true});
+            const response= await axios.get('http://localhost:8080/api/deleteFromCart?detailId='+detailId,{withCredentials:true});
             if(response.data){
                 removeFromCart();
             }

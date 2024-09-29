@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-//@CrossOrigin(origins = "http://localhost:3000")
-@CrossOrigin(origins = "https://bt2701.github.io/PizzaShop/", allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins = "https://bt2701.github.io/PizzaShop/", allowCredentials = "true")
 
 @RestController
 public class SanPhamCTL {

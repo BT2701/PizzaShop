@@ -46,7 +46,7 @@ const Profile = () => {
       formData.append('makh', makh);
 
       try {
-        const response = await axios.post('http://localhost:8081/api/upload', formData, {
+        const response = await axios.post('http://localhost:8080/api/upload', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
@@ -88,7 +88,7 @@ const Profile = () => {
   const handledUpdate = async(event)=>{
     event.preventDefault();
     try{
-      const response = await axios.put("http://localhost:8081/api/updateCustomer",null,{
+      const response = await axios.put("http://localhost:8080/api/updateCustomer",null,{
         params:{
           makh: makh,
           avt: avt,
@@ -125,7 +125,7 @@ const Profile = () => {
   useEffect(()=>{
     const checkSession= async()=>{
       try{
-        const response = await axios.get('http://localhost:8081/api/session', { withCredentials: true });
+        const response = await axios.get('http://localhost:8080/api/session', { withCredentials: true });
         if (response.data.authenticated) {
           setUser(response.data.user);
           const userData = response.data.user;

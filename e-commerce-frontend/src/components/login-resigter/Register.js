@@ -24,7 +24,7 @@ function Register() {
         try {
             if(password===repeat){
                 
-                const response = await axios.post("http://localhost:8081/api/register?fullname="+fullname+"&email="+email+"&phone="+phone+"&password="+password);
+                const response = await axios.post("http://localhost:8080/api/register?fullname="+fullname+"&email="+email+"&phone="+phone+"&password="+password);
                 if(response.data){
                     setModalContent({ message: 'Register Successful!', success: true });
                     setTimeout(() => {
