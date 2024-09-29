@@ -1,17 +1,16 @@
-# Chọn base image
-FROM maven:3.9.9~openjdk-17 AS build
-FROM openjdk:17-jdk-slim
-
-# Thiết lập thư mục làm việc
+FROM maven:3-openjdk-17 AS build
 WORKDIR /app
-COPY ./app/
-RUN mvn clean package
 
-# Sao chép file jar từ target sang container
-COPY target/my-spring-boot-app.jar app.jar
+COPY . .
+RUN mvn clean package -DskipTests
 
-# Cấu hình biến môi trường (nếu cần)
-ENV JAVA_OPTS="-Xmx512m"
 
-# Chạy ứng dụng
-ENTRYPOINT ["java", "-jar", "/app/app.jar"]
+# Run stage
+
+FROM openjdk:17-jdk-slim
+WORKDIR /app
+
+COPY --from=build /app/target/demo-0.0.1-SNAPSHOT.war demo.war
+EXPOSE 8080 
+
+ENTRYPOINT ["java","-jar","demo.war"]
