@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
-//@CrossOrigin(origins = "https://bt2701.github.io/PizzaShop/", allowCredentials = "true")
+@CrossOrigin(origins = "${frontend.url}", allowCredentials = "true")
+
 
 public class LoaiCTL {
     @Autowired
