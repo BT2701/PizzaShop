@@ -19,7 +19,7 @@ const App = () => {
         <CartProvider>
         <Router>
             <Routes>
-                <Route path="/" element={<Navigate to="/PizzaShop/login" />} />
+                <Route path="/PizzaShop" element={<Navigate to="/PizzaShop/login" />} />
                 <Route path="/PizzaShop/login" element={<Login />} />
                 <Route path="/PizzaShop/register" element={<Register />} />
                 <Route path="/PizzaShop/forgot" element={<ForgotPassword/>}/>
