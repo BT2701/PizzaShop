@@ -30,7 +30,7 @@ const Header = () => {
                 if (response.data.authenticated) {
                     setUser(response.data.user);
                 } else {
-                    navigate('/PizzaShop/login'); // Chuyển hướng đến trang đăng nhập nếu không xác thực
+                    // navigate('/PizzaShop/login'); // Chuyển hướng đến trang đăng nhập nếu không xác thực
                 }
             } catch (error) {
                 console.error('Error checking session:', error);

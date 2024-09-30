@@ -19,7 +19,7 @@ const App = () => {
         <CartProvider>
         <Router>
             <Routes>
-                {/* <Route path="/" element={<Navigate to="/login" />} /> */}
+                <Route path="/" element={<Navigate to="/PizzaShop/login" />} />
                 <Route path="/PizzaShop/login" element={<Login />} />
                 <Route path="/PizzaShop/register" element={<Register />} />
                 <Route path="/PizzaShop/forgot" element={<ForgotPassword/>}/>
@@ -37,7 +37,7 @@ const MainApp = () => {
             <Header />
             <div className="flex flex-grow">
                 <Routes>
-                    <Route path="/PizzaShop/" element={<Navigate to="/PizzaShop/homepage" />} />
+                    {/* <Route path="/PizzaShop/" element={<Navigate to="/PizzaShop/homepage" />} /> */}
                     <Route path="/PizzaShop/homepage" element={<Client_Home />} />
                     <Route path="/PizzaShop/products" element={<Client_Products />} />
                     <Route path='/PizzaShop/profile' element={<Profile/>}/>
