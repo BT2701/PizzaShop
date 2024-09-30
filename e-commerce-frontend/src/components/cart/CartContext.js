@@ -11,7 +11,7 @@ export const CartProvider = ({ children }) => {
   // Hàm để lấy dữ liệu từ API
   const fetchCartCount = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/api/cart',{withCredentials: true}); // Đường dẫn API lấy số lượng sản phẩm trong giỏ hàng
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/cart`,{withCredentials: true}); // Đường dẫn API lấy số lượng sản phẩm trong giỏ hàng
       setCartCount(response.data.count);
     } catch (error) {
       console.error('Failed to fetch cart count:', error);

@@ -20,9 +20,9 @@ const App = () => {
         <Router>
             <Routes>
                 {/* <Route path="/" element={<Navigate to="/login" />} /> */}
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/forgot" element={<ForgotPassword/>}/>
+                <Route path="/PizzaShop/login" element={<Login />} />
+                <Route path="/PizzaShop/register" element={<Register />} />
+                <Route path="/PizzaShop/forgot" element={<ForgotPassword/>}/>
                 <Route path="/*" element={<MainApp />} />
             </Routes>
         </Router>
@@ -37,12 +37,12 @@ const MainApp = () => {
             <Header />
             <div className="flex flex-grow">
                 <Routes>
-                    <Route path="/" element={<Navigate to="/homepage" />} />
-                    <Route path="/homepage" element={<Client_Home />} />
-                    <Route path="/products" element={<Client_Products />} />
-                    <Route path='/profile' element={<Profile/>}/>
-                    <Route path='/history' element={<OrderHistory/>}/>
-                    <Route path='/contact' element={<Contact/>}/>
+                    <Route path="/PizzaShop/" element={<Navigate to="/PizzaShop/homepage" />} />
+                    <Route path="/PizzaShop/homepage" element={<Client_Home />} />
+                    <Route path="/PizzaShop/products" element={<Client_Products />} />
+                    <Route path='/PizzaShop/profile' element={<Profile/>}/>
+                    <Route path='/PizzaShop/history' element={<OrderHistory/>}/>
+                    <Route path='/PizzaShop/contact' element={<Contact/>}/>
                 </Routes>
             </div>
             <Footer />

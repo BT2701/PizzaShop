@@ -26,11 +26,11 @@ const Header = () => {
     useEffect(() => {
         const checkSession = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/api/session', { withCredentials: true });                
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}/session`, { withCredentials: true });                
                 if (response.data.authenticated) {
                     setUser(response.data.user);
                 } else {
-                    navigate('/login'); // Chuyển hướng đến trang đăng nhập nếu không xác thực
+                    navigate('/PizzaShop/login'); // Chuyển hướng đến trang đăng nhập nếu không xác thực
                 }
             } catch (error) {
                 console.error('Error checking session:', error);
@@ -40,7 +40,7 @@ const Header = () => {
         };
         const checkCart= async()=>{
           try {
-            const cartData= await axios.get('http://localhost:8080/api/cart',{withCredentials: true});
+            const cartData= await axios.get(`${process.env.REACT_APP_API_URL}/cart`,{withCredentials: true});
                 if(cartData.data){
                   setNumOfCart(cartData.data.count);
                   setDetails(cartData.data.details);
@@ -63,7 +63,7 @@ const Header = () => {
         <div className="row d-flex align-items-center container-fluid">
           {/* Logo */}
           <div className="col-lg-4 col-6 web-logo">
-            <Link to={'/homepage'}><i class="fa-solid fa-pizza-slice mr-2 header-icon-shop"></i>BT SHOP</Link>
+            <Link to={'/PizzaShop/homepage'}><i class="fa-solid fa-pizza-slice mr-2 header-icon-shop"></i>BT SHOP</Link>
           </div>
 
           {/* Search Bar */}
@@ -91,10 +91,10 @@ const Header = () => {
                 <div className="user-actions">
                   <ul className="user-action_list">
                     <li className="user-action_list-item">
-                      <Link to={"/profile"} className="nav-link">Profile</Link>
+                      <Link to={"/PizzaShop/profile"} className="nav-link">Profile</Link>
                     </li>
                     <li className="user-action_list-item">
-                      <Link to={"/login"} className="nav-link">Log out</Link>
+                      <Link to={"/PizzaShop/login"} className="nav-link">Log out</Link>
                     </li>
                   </ul>
                 </div>
@@ -142,17 +142,17 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 navbar-list">
             <li className={`nav-item ${activeIndex === 0 ? 'active' : ''}`} onClick={() => handleClick(0)}>
-              <Link className="nav-link" to={'/homepage'} >
+              <Link className="nav-link" to={'/PizzaShop/homepage'} >
                 <i class="fa-solid fa-house mr-2"></i>
                 Trang chủ
               </Link>
             </li>
             <li className={`nav-item ${activeIndex === 1 ? 'active' : ''}`} onClick={() => handleClick(1)}>
-              <Link to={'/products'} className="nav-link">
+              <Link to={'/PizzaShop/products'} className="nav-link">
               <i class="fa-solid fa-pizza-slice mr-2"></i>Sản phẩm</Link>
             </li>
             <li className={`nav-item ${activeIndex === 2 ? 'active' : ''}`} onClick={() => handleClick(2)}>
-              <Link className="nav-link" to={'/contact'}>
+              <Link className="nav-link" to={'/PizzaShop/contact'}>
               <i class="fa-solid fa-phone mr-2"></i>
               Liên hệ
               </Link>
@@ -166,7 +166,7 @@ const Navbar = () => {
             </li>
             <li className="nav-item d-lg-none d-flex align-items-center">
               <i className="fa-solid fa-right-to-bracket" style={{ color: 'aliceblue', marginRight: 10 }}></i>
-              <Link to={"/login"} className="nav-link">Log out</Link>
+              <Link to={"/PizzaShop/login"} className="nav-link">Log out</Link>
             </li>
           </ul>
         </div>

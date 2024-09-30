@@ -24,7 +24,7 @@ function Register() {
         try {
             if(password===repeat){
                 
-                const response = await axios.post("http://localhost:8080/api/register?fullname="+fullname+"&email="+email+"&phone="+phone+"&password="+password);
+                const response = await axios.post(`${process.env.REACT_APP_API_URL}/register?fullname=`+fullname+"&email="+email+"&phone="+phone+"&password="+password);
                 if(response.data){
                     setModalContent({ message: 'Register Successful!', success: true });
                     setTimeout(() => {
@@ -85,7 +85,7 @@ function Register() {
                                 <label>
                                 Have an account?
                                 </label>
-                                <Link to={"/login"} className='text-danger'>Log in</Link>
+                                <Link to={"/PizzaShop/login"} className='text-danger'>Log in</Link>
                             </div>
                     </div>
                     <div className="login-footer">

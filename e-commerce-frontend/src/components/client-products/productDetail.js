@@ -18,7 +18,7 @@ const ProductDetail = ({ productId, showModal, saler }) => {
   }
   useEffect(() => {
     // Fetch product details here
-    axios.get(`http://localhost:8080/api/product?productId=${productId}`).then((response) => {
+    axios.get(`${process.env.REACT_APP_API_URL}/product?productId=${productId}`).then((response) => {
       setDetailProduct(response.data);
       setShowModal(showModal);
     });
@@ -45,7 +45,7 @@ const ProductDetail = ({ productId, showModal, saler }) => {
     }
     else{
       try {
-        const response= await axios.get('http://localhost:8080/api/addToCart?productId='+detailProduct.masp+'&quantity='+soluong,{withCredentials:true});
+        const response= await axios.get(`${process.env.REACT_APP_API_URL}/addToCart?productId=`+detailProduct.masp+'&quantity='+soluong,{withCredentials:true});
         if(response.data){
           setShowModal(false);
           addToCart();

@@ -46,7 +46,7 @@ const Profile = () => {
       formData.append('makh', makh);
 
       try {
-        const response = await axios.post('http://localhost:8080/api/upload', formData, {
+        const response = await axios.post(`${process.env.REACT_APP_API_URL}/upload`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
@@ -88,7 +88,7 @@ const Profile = () => {
   const handledUpdate = async(event)=>{
     event.preventDefault();
     try{
-      const response = await axios.put("http://localhost:8080/api/updateCustomer",null,{
+      const response = await axios.put(`${process.env.REACT_APP_API_URL}/updateCustomer`,null,{
         params:{
           makh: makh,
           avt: avt,
@@ -125,7 +125,7 @@ const Profile = () => {
   useEffect(()=>{
     const checkSession= async()=>{
       try{
-        const response = await axios.get('http://localhost:8080/api/session', { withCredentials: true });
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/session`, { withCredentials: true });
         if (response.data.authenticated) {
           setUser(response.data.user);
           const userData = response.data.user;
@@ -176,7 +176,7 @@ const Profile = () => {
         {!isContentVisible && (<i class="fa-solid fa-chevron-down control-down" onClick={handleShowClick}></i>)}
         {isContentVisible && (<i class="fa-solid fa-chevron-up control-up" onClick={handleHideClick}></i>)}
         {isContentVisible && ( <div class="profile-header-right-control">
-            <Link className="btn profile-header-right-control-btn profile-option-btn" to={"/history"}><i class="fa-solid fa-clock-rotate-left"></i> Order History</Link>
+            <Link className="btn profile-header-right-control-btn profile-option-btn" to={"/PizzaShop/history"}><i class="fa-solid fa-clock-rotate-left"></i> Order History</Link>
             <button className="btn profile-header-right-control-btn profile-option-btn" onClick={handleOpenModalChange}><i className="fa-solid fa-arrows-rotate"></i> Change Password</button>
           </div>)}
         </div>

@@ -69,7 +69,7 @@ const OrderHistory = () => {
   useEffect(()=>{
     const checkData= async()=>{
       try {
-        const response= await axios.get('http://localhost:8080/api/history',{withCredentials:true});
+        const response= await axios.get(`${process.env.REACT_APP_API_URL}/history`,{withCredentials:true});
         if(response.data){
           setHistories(response.data.hoaDons);
         }
@@ -84,7 +84,7 @@ const OrderHistory = () => {
     <div className='container-history-main'>
       <div className="history-container">
         <div className="history-header">
-          <Link to={"/profile"} className="btn"><i className="fa-solid fa-chevron-left"></i></Link>
+          <Link to={"/PizzaShop/profile"} className="btn"><i className="fa-solid fa-chevron-left"></i></Link>
           <h2>Lịch sử mua hàng</h2>
         </div>
         <div className="history-content">

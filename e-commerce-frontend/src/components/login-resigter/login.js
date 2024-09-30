@@ -20,7 +20,7 @@ const Login = () => {
     const login = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8080/api/login', null, {
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/login`, null, {
                 params: {
                     username: username,
                     password: password
@@ -34,7 +34,7 @@ const Login = () => {
                 setUser(response.data.user);
                 setModalContent({ message: 'Login Succeeded!', success: true });
                 setTimeout(() => {
-                    navigate('/homepage');
+                    navigate('/PizzaShop/homepage');
                 }, 2000);
             }
         } catch (error) {
@@ -77,7 +77,7 @@ const Login = () => {
                                 />
                             </div>
                             <div className="form-group text-end">
-                                <Link to={"/forgot"} className='text-primary'>Forgot password?</Link>
+                                <Link to={"/PizzaShop/forgot"} className='text-primary'>Forgot password?</Link>
                             </div>
                             <div className="login-btn">
                                 <button className="btn-login btn btn-primary" type="submit">Log in</button>
@@ -86,7 +86,7 @@ const Login = () => {
                                 <label>
                                     You're new to BT Shop, right?
                                 </label>
-                                <Link to={"/register"} className='text-danger'>Sign up</Link>
+                                <Link to={"/PizzaShop/register"} className='text-danger'>Sign up</Link>
                             </div>
                         </div>
                         <div className="login-footer">
